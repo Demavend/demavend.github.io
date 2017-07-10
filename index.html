@@ -4,10 +4,21 @@
 
 	<head>
 	<meta charset="UTF-8"/>
-	<title>Test</title> 
+	<title>Табличка с книгами</title> 
 	<link href="style.css" rel="stylesheet" type="css/text"/>
-	<script type="text/javascript"src='node_modyles/jquery/dist/jquery.mi.js'></script>
-	<script type="text/javascript"src='node_modyles/bootstrap/dist/js/bootstrap.min.js'></script>
+	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	
+	<script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
+	
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	
 	<script type="text/javascript" src="index.js"></script>
 				
 	</head>
@@ -15,9 +26,58 @@
 
 	<body>
 	
+		<div class="navbar navbar-default">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-2 text-center"><h3>Обложка</h3></div>
+					<div class="col-md-8 text-center"><h3>Аннотация</h3></div>
+					<div class="col-md-2 text-center"><h3>Ссылки</h3></div>
+				</div>
+
+			</div>
+		</div>
+		
+			<div class="container" onclick="jv()">
+				<div class="col"><h1 class="text-center text-primary">Пять недель на воздушном шаре</h1>	
+					<div class="row bg-info">
+						<div class="col-md-2"><div class="text-center"><img src="http://royallib.com/data/images/17/cover_17913.jpg" width="100" height="110" hspace="50" align="middle" class="img-responsive"></img></div></div>
+						<div class="col-md-8"><h4 class="text-justify">«Пять недель на воздушном шаре» – яркий и увлекательный фантастический роман знаменитого французского писателя Жюля Верна. Такие книги призваны способствовать гуманитарному развитию юношества, расширению кругозора и знаний о мире и о человеке; они могут быть использованы в учебном процессе. </h4></div>
+						<div class="col-md-2"><h4 class="text-center">
+							<div class="col">
+								<a src="http://royallib.com/book/vern_gyul/pyat_nedel_na_vozdushnom_share.html"><button class="btn btn-success">Перейти к книге</button></a>
+							</div>
+						</h4></div>
+					</div>
+				</div>
+			</div>
+			<div id="jv" class="modal fade" tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button class="close" data-dismiss="modal">x</button>
+						</div>
+						<div class="modal-body">
+							<div class="coll">
+								<p>Автор: Верн Жюль</p>
+								<p>Название: Пять недель на воздушном шаре</p>
+								<p>Жанр: Путешествия и география</p>
+								<p>Серия: Книги, любимые с детства</p>
+								<p>ISBN: 5-486-02596-3, 978-5-486-02596-9</p>
+								<p>Издательский дом: Маариф</p>
+								<p>Год издания: 1987</p> 
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+						</div>
+					</div>
+				</div>
+			</div>
 	
-	
-	
+
+		<script>
+			$('#jv').modal();
+		</script>
 	</body>
 
 </html>
