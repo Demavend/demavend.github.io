@@ -12,7 +12,7 @@ var dl = {
 	janr: "Жанр: Деловая литература",
 	publ: "Издательский дом: Вершина",
 	year: "Год издания: 2006"
-}
+};
 
 
 var ratt = {
@@ -21,7 +21,7 @@ var ratt = {
 	janr: "Жанр: Космическая фантастика",
 	publ: "Издательский дом: Эксмо, Александр Корженевский",
 	year: "Год издания: 2007"
-}
+};
 
 
 var witch = {
@@ -30,7 +30,7 @@ var witch = {
 	janr: "Жанр: Фэнтези",
 	publ: "Издательский дом: Астрель",
 	year: "Год издания: 1986"
-}
+};
 
 
 var tale = {
@@ -39,7 +39,7 @@ var tale = {
 	janr: "Жанр: Мифы. Легенды. Эпос",
 	publ: "Издательский дом: Вече",
 	year: "Год издания: 2008"
-}
+};
 
 function wind(x){ 
     $('#modal').modal();
@@ -51,9 +51,14 @@ function wind(x){
 	};  
 	
 function hideDiv(x){
-	$("div.openModal:eq("+x+")").hide();	
+	$("div.openModal:eq("+x+")").hide(); 
+	$("a.showHide:eq("+x+")").hide();	
 };
 
+function showDiv(){
+	$("div.openModal").show(); 
+	$("a.showHide").show();	
+};
 	
     
 		
