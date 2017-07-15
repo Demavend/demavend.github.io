@@ -29,7 +29,6 @@
 
 
 	<body>
-	
 		<div class="navbar navbar-default">
 			<div class="container">
 				<div class="row">
@@ -55,7 +54,25 @@
 		</div>
 			
 			
-				<div id="hide1" href="#modal1" class="container open_modal">
+				<div id="modal" class="modal fade" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button class="close" data-dismiss="modal">x</button>
+							</div>
+							<div class="modal-body">
+								<div id="bodyModal" class="coll">
+									<p>1</p>									
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="container openModal" onclick="wind(jv)">
 					<div class="col"><h1 class="text-center text-primary">Пять недель на воздушном шаре</h1>	
 						<div class="row bg-info">
 							<div class="col-md-2"><div class="text-center"><img src="http://royallib.com/data/images/17/cover_17913.jpg" width="160" height="170" hspace="20" align="middle" class="img-responsive"></img></div></div>
@@ -69,33 +86,9 @@
 					</div>
 				</div>
 				
-				<div id="modal1" class="modal fade" tabindex="-1">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button class="close" data-dismiss="modal">x</button>
-							</div>
-							<div class="modal-body">
-								<div class="coll">
-									<p>Автор: Верн Жюль</p>
-									<p>Название: Пять недель на воздушном шаре</p>
-									<p>Жанр: Путешествия и география</p>
-									<p>Серия: Книги, любимые с детства</p>
-									<p>ISBN: 5-486-02596-3, 978-5-486-02596-9</p>
-									<p>Издательский дом: Маариф</p>
-									<p>Год издания: 1987</p> 
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
-							</div>
-						</div>
-					</div>
-				</div>
-	
+						
 			
-			
-			<div id="hide2" href="#modal2" class="container open_modal">
+			<div class="container openModal" onclick="wind(dl)">
 				<div class="col"><h1 class="text-center text-primary">Deadline. Роман об управлении проектами</h1>	
 					<div class="row bg-info">
 						<div class="col-md-2"><div class="text-center"><img src="http://royallib.com/data/images/82/cover_82951.jpg"  width="160" height="170" hspace="20" align="middle" class="img-responsive"></img></div></div>
@@ -108,31 +101,9 @@
 					</div>
 				</div>
 			</div>
-			<div id="modal2" class="modal fade" tabindex="-1">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button class="close" data-dismiss="modal">x</button>
-						</div>
-						<div class="modal-body">
-							<div class="coll">
-								<p>Автор: Демарко Том</p>
-								<p>Название: Deadline. Роман об управлении проектами</p>
-								<p>Жанр: Деловая литература</p>
-								<p>ISBN: 5-9626-0132-7 </p>
-								<p>Издательский дом: Вершина</p>
-								<p>Год издания: 2006 </p> 
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
-						</div>
-					</div>
-				</div>
-			</div>
+			
 	
-	
-			<div id="hide3" href="#modal3" class="container open_modal">
+			<div class="container openModal" onclick="wind(ratt)">
 				<div class="col"><h1 class="text-center text-primary">Стальная Крыса</h1>	
 					<div class="row bg-info">
 						<div class="col-md-2"><div class="text-center"><img src="http://royallib.com/data/images/28/cover_28357.jpg"  width="160" height="170" hspace="20" align="middle" class="img-responsive"></img></div></div>
@@ -145,32 +116,9 @@
 					</div>
 				</div>
 			</div>
-			<div id="modal3" class="modal fade" tabindex="-1">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button class="close" data-dismiss="modal">x</button>
-						</div>
-						<div class="modal-body">
-							<div class="coll">
-								<p>Автор: Гаррисон Гарри</p>
-								<p>Название: Стальная Крыса </p>
-								<p>Жанр: Космическая фантастика</p>
-								<p>Серия: Стальная Крыса (твердый переплет)</p>
-								<p>ISBN: 5-87917-042-x, 978-5-87917-042-9, 5-04-000394-3, 978-5-04-000394-5 </p>
-								<p>Издательский дом: Эксмо, Александр Корженевский </p>
-								<p>Год издания: 2007 </p> 
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
-						</div>
-					</div>
-				</div>
-			</div>
-	
+				
 	 
-			<div id="hide4" href="#modal4" class="container open_modal">
+			<div class="container openModal" onclick="wind(witch)">
 				<div class="col"><h1 class="text-center text-primary">Ведьмак</h1>	
 					<div class="row bg-info">
 						<div class="col-md-2"><div class="text-center"><img src="http://img.yakaboo.ua/media/catalog/product/cache/1/small_image/140x210/9df78eab33525d08d6e5fb8d27136e95/3/8/38280_57545_3.jpg"  width="160" height="170" hspace="20" align="middle" class="img-responsive"></img></div></div>
@@ -183,30 +131,9 @@
 					</div>
 				</div>
 			</div>
-			<div id="modal4" class="modal fade" tabindex="-1">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button class="close" data-dismiss="modal">x</button>
-						</div>
-						<div class="modal-body">
-							<div class="coll">
-								<p>Автор: Сапковский Анджей</p>
-								<p>Название: Ведьмак</p>
-								<p>Жанр: Фэнтези</p>
-								<p>Издательский дом: Астрель</p>
-								<p>Год издания: 1986 </p> 
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
-						</div>
-					</div>
-				</div>
-			</div>
+				
 	
-	
-			<div id="hide5" href="#modal5" class="container open_modal">
+			<div class="container openModal" onclick="wind(tale)">
 				<div class="col"><h1 class="text-center text-primary">Нордическая мифология</h1>	
 					<div class="row bg-info">
 						<div class="col-md-2"><div class="text-center"><img src="http://royallib.com/data/images/320/cover_320022.jpg"  width="160" height="170" hspace="20" align="middle" class="img-responsive"></img></div></div>
@@ -219,30 +146,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="modal5" class="modal fade" tabindex="-1">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button class="close" data-dismiss="modal">x</button>
-						</div>
-						<div class="modal-body">
-							<div class="coll">
-								<p>Автор: Торп Бенджамин</p>
-								<p>Название: Нордическая мифология</p>
-								<p>Жанр: Мифы. Легенды. Эпос</p>
-								<p>Издательский дом: Вече </p>
-								<p>Год издания: 2008</p> 
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
-						</div>
-					</div>
-				</div>
-			</div>
-	
-			<div id="overlay" style="display: none;"></div>
-		
+								
 	</body>
 
 </html>

@@ -1,52 +1,56 @@
-			
-	$(document).ready(function() { 
-    
-    var overlay = $('#overlay'); 
-    var open_modal = $('.open_modal'); 
-     
-     open_modal.click( function(event){ 
-         event.preventDefault();
-         var div = $(this).attr('href'); 
-         overlay.fadeIn(100, 
-             function(){ 
-                 $(div).modal();
-         });
-     });
+var jv = {
+	autor: "Автор: Верн Жюль",
+	title: "Название: Пять недель на воздушном шаре",
+	janr: "Жанр: Путешествия и география",
+	publ: "Издательский дом: Маариф",
+	year: "Год издания: 1987"};
 
-     
-});		
-$('#hide1').hide();
 
-	$(document).ready(function() { 
-    
-    var overlay = $('#overlay'); 
-    var show_hide = $('a.show_hide'); 
-    
-    show_hide.click( function(event){ 
-        event.preventDefault();
-        var a = $(this).attr('name'); 
-        overlay.fadeIn(100, 
-            function(){ 
-                $(a).hide();
-         });
-     });
+var dl = {
+	autor: "Автор: Демарко Том",
+	title: "Название: Deadline. Роман об управлении проектами",
+	janr: "Жанр: Деловая литература",
+	publ: "Издательский дом: Вершина",
+	year: "Год издания: 2006"
+}
 
-     
-});		
 
-$(document).ready(function() { 
-    
-    var overlay = $('#overlay'); 
-    var show = $('a.dropdown-footer'); 
-    
-    show.click( function(event){ 
-        event.preventDefault();
-        var a1 = $('div[href^="#modal"]'); 
-        overlay.fadeIn(100, 
-            function(){ 
-                $(a1).show();
-         });
-     });
+var ratt = {
+	autor: "Автор: Гаррисон Гарри",
+	title: "Название: Стальная Крыса",
+	janr: "Жанр: Космическая фантастика",
+	publ: "Издательский дом: Эксмо, Александр Корженевский",
+	year: "Год издания: 2007"
+}
 
-     
-});		
+
+var witch = {
+	autor: "Автор: Сапковский Анджей",
+	title: "Название: Ведьмак",
+	janr: "Жанр: Фэнтези",
+	publ: "Издательский дом: Астрель",
+	year: "Год издания: 1986"
+}
+
+
+var tale = {
+	autor: "Автор: Торп Бенджамин",
+	title: "Название: Нордическая мифология",
+	janr: "Жанр: Мифы. Легенды. Эпос",
+	publ: "Издательский дом: Вече",
+	year: "Год издания: 2008"
+}
+
+function wind(x){ 
+    $('#modal').modal();
+	$("#bodyModal").text(x.autor);
+	$("#bodyModal").append('<br>' + x.title);
+	$("#bodyModal").append('<br>' + x.janr);
+	$("#bodyModal").append('<br>' + x.publ);
+	$("#bodyModal").append('<br>' + x.year);
+	};  
+	
+
+	
+    
+		
