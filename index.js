@@ -50,6 +50,9 @@ function wind(x){
 	$("#bodyModal").append('<br>' + x.year);
 	};  
 	
+function hideDiv(x){
+	$("div.openModal:eq("+x+")").hide();	
+};
 
 	
     
