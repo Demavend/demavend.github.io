@@ -45,27 +45,42 @@ function wind (x){
 	document.querySelector('#bodyModal').innerHTML = ""+x.autor+"<br>"+x.title+"<br>"+x.janr+"<br>"+x.publ+"<br>"+x.year;}
 
 var myModal = document.querySelectorAll('.openModal');
-myModal['' + 0 + ''].addEventListener('click', function(e) {
+myModal[0].addEventListener('click', function() {
 	$('#modal').modal();
 	wind (jv);				
 }, false);
 
-myModal['' + 1 + ''].addEventListener('click', function(e) {
+myModal[1].addEventListener('click', function() {
 	$('#modal').modal();
 	wind (dl);				
 }, false);
 
-myModal['' + 2 + ''].addEventListener('click', function(e) {
+myModal[2].addEventListener('click', function() {
 	$('#modal').modal();
 	wind (ratt);				
 }, false);
 
-myModal['' + 3 + ''].addEventListener('click', function(e) {
+myModal[3].addEventListener('click', function() {
 	$('#modal').modal();
 	wind (witch);				
 }, false);
 
-myModal['' + 4 + ''].addEventListener('click', function(e) {
+myModal[4].addEventListener('click', function() {
 	$('#modal').modal();
 	wind (tale);				
 }, false);
+
+var mySpoiler = document.querySelectorAll('a.showHide');
+ function hideDiv(x){
+	myModal[x].style.display = "none";
+	mySpoiler[x].parentNode.style.display = "none";	
+ };
+
+function showDiv(){
+	for (var i = 0; i < mySpoiler.length; i++){
+		myModal[i].removeAttribute('style');
+		mySpoiler[i].parentNode.removeAttribute('style');}	
+};
+	
+
+
