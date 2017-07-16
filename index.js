@@ -1,4 +1,4 @@
-var jv = {
+var a0 = {
 	autor: "Автор: Верн Жюль",
 	title: "Название: Пять недель на воздушном шаре",
 	janr: "Жанр: Путешествия и география",
@@ -41,24 +41,18 @@ var tale = {
 	year: "Год издания: 2008"
 };
 
-function wind(x){ 
-    $('#modal').modal();
-	$("#bodyModal").text(x.autor);
-	$("#bodyModal").append('<br>' + x.title);
-	$("#bodyModal").append('<br>' + x.janr);
-	$("#bodyModal").append('<br>' + x.publ);
-	$("#bodyModal").append('<br>' + x.year);
-	};  
-	
-function hideDiv(x){
-	$("div.openModal:eq("+x+")").hide(); 
-	$("a.showHide:eq("+x+")").hide();	
-};
+function wind (x){
+	document.querySelector('#bodyModal').innerHTML = ""+x.autor+"<br>"+x.title+"<br>";}
 
-function showDiv(){
-	$("div.openModal").show(); 
-	$("a.showHide").show();	
-};
-	
-    
-		
+var myModal = document.querySelectorAll('.openModal');
+for (var i = 0; i < myModal.length; i++){
+
+	myModal['' + i + ''].addEventListener('click', function(e) {
+		var a = $(this).closest('div.openModal').attr('name');
+		$('#modal').modal();
+		var n = String(a)
+		wind (String(n));
+				
+	}, false);
+
+}

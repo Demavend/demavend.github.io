@@ -19,12 +19,8 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	
-	<script type="text/javascript" src="index.js"></script>
 	
-	<script type="text/javascript">
 	
-</script>
-				
 	</head>
 
 
@@ -43,11 +39,11 @@
 		<div class="dropdown">
 			<button class="btn btn-warning dropdown-toggle" data-toggle="dropdown">Скрыть элементы<span class="caret"></span></button>
 			<ul class="dropdown-menu">
-				<li><a class="showHide" onclick="hideDiv('0')">Жюль Верн</a></li>
-				<li><a class="showHide" onclick="hideDiv('1')">Том Демарко</a></li>
-				<li><a class="showHide" onclick="hideDiv('2')">Гарри Гаррисон</a></li>
-				<li><a class="showHide" onclick="hideDiv('3')">Анджей Сапковский</a></li>
-				<li><a class="showHide" onclick="hideDiv('4')">Бенджамин Торп</a></li>
+				<li><a class="showHide">Жюль Верн</a></li>
+				<li><a class="showHide">Том Демарко</a></li>
+				<li><a class="showHide">Гарри Гаррисон</a></li>
+				<li><a class="showHide">Анджей Сапковский</a></li>
+				<li><a class="showHide">Бенджамин Торп</a></li>
 				<li class="divider"></li>
 				<li><a class="dropdown-footer" onclick="showDiv()">Вернуть всех</a></li>
 			</ul>
@@ -71,8 +67,8 @@
 						</div>
 					</div>
 				</div>
-			
-				<div class="container openModal" onclick="wind(jv)">
+		
+				<div class="container openModal" name="jv">
 					<div class="col"><h1 class="text-center text-primary">Пять недель на воздушном шаре</h1>	
 						<div class="row bg-info">
 							<div class="col-md-2"><div class="text-center"><img src="http://royallib.com/data/images/17/cover_17913.jpg" width="160" height="170" hspace="20" align="middle" class="img-responsive"></img></div></div>
@@ -88,7 +84,7 @@
 				
 						
 			
-			<div class="container openModal" onclick="wind(dl)">
+			<div class="container openModal" name="dl">
 				<div class="col"><h1 class="text-center text-primary">Deadline. Роман об управлении проектами</h1>	
 					<div class="row bg-info">
 						<div class="col-md-2"><div class="text-center"><img src="http://royallib.com/data/images/82/cover_82951.jpg"  width="160" height="170" hspace="20" align="middle" class="img-responsive"></img></div></div>
@@ -103,7 +99,7 @@
 			</div>
 			
 	
-			<div class="container openModal" onclick="wind(ratt)">
+			<div class="container openModal" name="ratt">
 				<div class="col"><h1 class="text-center text-primary">Стальная Крыса</h1>	
 					<div class="row bg-info">
 						<div class="col-md-2"><div class="text-center"><img src="http://royallib.com/data/images/28/cover_28357.jpg"  width="160" height="170" hspace="20" align="middle" class="img-responsive"></img></div></div>
@@ -118,7 +114,7 @@
 			</div>
 				
 	 
-			<div class="container openModal" onclick="wind(witch)">
+			<div class="container openModal" name="witch">
 				<div class="col"><h1 class="text-center text-primary">Ведьмак</h1>	
 					<div class="row bg-info">
 						<div class="col-md-2"><div class="text-center"><img src="http://img.yakaboo.ua/media/catalog/product/cache/1/small_image/140x210/9df78eab33525d08d6e5fb8d27136e95/3/8/38280_57545_3.jpg"  width="160" height="170" hspace="20" align="middle" class="img-responsive"></img></div></div>
@@ -133,7 +129,7 @@
 			</div>
 				
 	
-			<div class="container openModal" onclick="wind(tale)">
+			<div class="container openModal" name="tale">
 				<div class="col"><h1 class="text-center text-primary">Нордическая мифология</h1>	
 					<div class="row bg-info">
 						<div class="col-md-2"><div class="text-center"><img src="http://royallib.com/data/images/320/cover_320022.jpg"  width="160" height="170" hspace="20" align="middle" class="img-responsive"></img></div></div>
@@ -146,6 +142,8 @@
 					</div>
 				</div>
 			</div>
+		
+		<script type="text/javascript" src="index.js"></script>
 								
 	</body>
 
