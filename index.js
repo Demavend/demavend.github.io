@@ -1,4 +1,4 @@
-var a0 = {
+var jv = {
 	autor: "Автор: Верн Жюль",
 	title: "Название: Пять недель на воздушном шаре",
 	janr: "Жанр: Путешествия и география",
@@ -42,17 +42,30 @@ var tale = {
 };
 
 function wind (x){
-	document.querySelector('#bodyModal').innerHTML = ""+x.autor+"<br>"+x.title+"<br>";}
+	document.querySelector('#bodyModal').innerHTML = ""+x.autor+"<br>"+x.title+"<br>"+x.janr+"<br>"+x.publ+"<br>"+x.year;}
 
 var myModal = document.querySelectorAll('.openModal');
-for (var i = 0; i < myModal.length; i++){
+myModal['' + 0 + ''].addEventListener('click', function(e) {
+	$('#modal').modal();
+	wind (jv);				
+}, false);
 
-	myModal['' + i + ''].addEventListener('click', function(e) {
-		var a = $(this).closest('div.openModal').attr('name');
-		$('#modal').modal();
-		var n = String(a)
-		wind (String(n));
-				
-	}, false);
+myModal['' + 1 + ''].addEventListener('click', function(e) {
+	$('#modal').modal();
+	wind (dl);				
+}, false);
 
-}
+myModal['' + 2 + ''].addEventListener('click', function(e) {
+	$('#modal').modal();
+	wind (ratt);				
+}, false);
+
+myModal['' + 3 + ''].addEventListener('click', function(e) {
+	$('#modal').modal();
+	wind (witch);				
+}, false);
+
+myModal['' + 4 + ''].addEventListener('click', function(e) {
+	$('#modal').modal();
+	wind (tale);				
+}, false);
