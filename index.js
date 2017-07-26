@@ -4,7 +4,7 @@ var booksElements = [
 	{autor: "Автор: Гаррисон Гарри", title: "Название: Стальная Крыса", janr: "Жанр: Космическая фантастика", publ: "Издательский дом: Эксмо, Александр Корженевский", year: "Год издания: 2007"},
 	{autor: "Автор: Сапковский Анджей", title: "Название: Ведьмак", janr: "Жанр: Фэнтези", publ: "Издательский дом: Астрель", year: "Год издания: 1986"},
 	{autor: "Автор: Торп Бенджамин", title: "Название: Нордическая мифология", janr: "Жанр: Мифы. Легенды. Эпос", publ: "Издательский дом: Вече", year: "Год издания: 2008"}
-	];
+	];                                                                   //Тексты для модалок
 
 var	audioSrc =  ['<source src="http://77.245.68.26/books/s1/Sentyabr_2014/pyat_nedel/1.mp3?st=SchWZdUo_tMPmfVcgIWIRw&amp;e=1501085394">',
 				'<source src="http://77.245.68.26/books/s1/Sentyabr_2014/pyat_nedel/2.mp3?st=angf6iaXQ9EV_1Jeb_79TA&amp;e=1501085776">',
@@ -50,97 +50,137 @@ var	audioSrc =  ['<source src="http://77.245.68.26/books/s1/Sentyabr_2014/pyat_n
 				'<source src="http://77.245.68.26/books/s1/Sentyabr_2014/pyat_nedel/42.mp3?st=eXUi1bbStvyzYG5ruMcf7A&amp;e=1501085776">',
 				'<source src="http://77.245.68.26/books/s1/Sentyabr_2014/pyat_nedel/43.mp3?st=c3LTbllTkslqGo4-OXLypA&amp;e=1501085776">',
 				'<source src="http://77.245.68.26/books/s1/Sentyabr_2014/pyat_nedel/44.mp3?st=0XUqHR5ABp9zxqvBBgIuJA&amp;e=1501085776">'];
-				
+																			//Ссылки на аудио файлы
 
-var myModal = document.querySelectorAll('.openModal');
+var myModal = document.querySelectorAll('.openModal');                      //Все кнопки модалок
 
-var mySpoiler = document.querySelectorAll('a.showHide');
+var mySpoiler = document.querySelectorAll('a.showHide');                    //Все спойлеры
 
-var audioList = document.querySelectorAll('div.player label');
+var audioList = document.querySelector('table.table.table-hover tbody');    //Треки
 
-var jukebox = document.querySelector('div.player');
+var audioBook = document.querySelector('div#audio');                        //Вкладка с треками
 
-for (var i = 0; i < myModal.length; i++) {
-	myModal[i].setAttribute('id', i);	
+for (var i = 0; i < myModal.length; i++) {                              	//Задаю айдишники всем
+	myModal[i].setAttribute('id', i);                                       //кнопкам с модалками
 };
 
 
-for (var j = 0; j < audioList.length; j++) {
-	audioList[j].setAttribute('data-src', audioSrc[j]);	
+for (var j = 0; j < audioSrc.length; j++) {                                	//Вставляю теги ТД и ТР
+	var newTr = document.createElement('tr');                       		//номерую их
+	newTr.innerHTML = '<tr><td data-num="'+j+'">Пять недель на воздушном шаре ' + (j+1) + '</td></tr>';
+	audioList.appendChild(newTr);
 };
 
-function windowContent (x){
-	document.querySelector('#bodyModal').innerHTML = ""+x.autor+"<br>"+x.title+"<br>"+x.janr+"<br>"+x.publ+"<br>"+x.year;}
+function windowContent (x){                                                	//Функция для вставки
+	document.querySelector('#bodyModal').innerHTML = ""+x.autor+"<br>"+x.title+"<br>"+x.janr+"<br>"+x.publ+"<br>"+x.year;}                                     //текста в модалку
 
-document.body.addEventListener('click', function(e){
-	if (e.target.getAttribute('class') === 'btn btn-info openModal'){
-	var a = e.target.getAttribute('id');
-	windowContent(booksElements[a]);
-	$('#modal').modal();
-	}else if(e.target.getAttribute('class') === 'showHide'){
-		var a = e.target.getAttribute('name');
-		e.target.style.display = "none";
-		var divBlock = document.getElementById(a);
-		divBlock.style.display = "none";
-	}else if(e.target.getAttribute('class') === 'dropdown-footer'){
-		var divShowed = document.querySelectorAll('.hideShow');
-		for (var i = 0; i < mySpoiler.length; i++){
-			mySpoiler[i].removeAttribute('style');
-			divShowed[i].removeAttribute('style')
+document.body.addEventListener('click', function(e){                    	//Ловим клик по бади
+	if (e.target.getAttribute('class') === 'btn btn-info openModal'){   	//Кнопка открывает модалку?
+	var a = e.target.getAttribute('id');                                    //Узнаем какой текст в окне
+	windowContent(booksElements[a]);                                        //Вставляем текст
+	$('#modal').modal();                                                    //Открываем окно
+	}else if(e.target.getAttribute('class') === 'showHide'){               	//Если клик по спойлеру
+		var a = e.target.getAttribute('name');                              //На какой элемент клик
+		e.target.style.display = "none";                                    //Скрыть элемент спойлера
+		var divBlock = document.getElementById(a);                     		//Какой блок связан
+		divBlock.style.display = "none";                                    //Скрыть блок
+	}else if(e.target.getAttribute('class') === 'dropdown-footer'){     	//Если клик по посл.спойл.
+		var divShowed = document.querySelectorAll('.hideShow');  			//Все скрываемые блоки
+		for (var i = 0; i < mySpoiler.length; i++){                         //Для всех элементов
+			mySpoiler[i].removeAttribute('style');                          //Показать все спойлеры
+			divShowed[i].removeAttribute('style')                           //Показать все блоки
 			}
 	};
 }, true);
 
-
-jukebox.addEventListener('click', function(e) {
-  var songName = e.target.getAttribute('data-src');
-  var audioPlayer = document.querySelector('#player');
-
-  if (audioPlayer) {
-
-    if (songName===audioPlayer.getAttribute('src')) {
-      if (audioPlayer.paused) {
-        audioPlayer.play();
-        e.target.id = 'playing';
-		e.target.setAttribute('class', 'btn btn-success');
-      } else {
-        audioPlayer.pause();
-        e.target.id = 'paused';
-		e.target.setAttribute('class', 'btn btn-warning');
-      }
-    } else {
-      audioPlayer.src = songName;
-      audioPlayer.play();
-      if (document.querySelector('#playing')) {
-        document.querySelector('#playing').setAttribute('class', 'btn btn-primary');
-		document.querySelector('#playing').id='';
-      } else {
-		document.querySelector('#playing').setAttribute('class', 'btn btn-primary');  
-        document.querySelector('#paused').id='';
-      }
-        e.target.id = 'playing';
-    }
-
-  } else {
-    var audioPlayer = document.createElement('audio');
-    audioPlayer.id = 'player';
-    e.target.id = 'playing';
-	e.target.setAttribute('class', 'btn btn-success');
-	
-    audioPlayer.src = songName;
-    document.body.appendChild(audioPlayer);
-    audioPlayer.play();
-
-    audioPlayer.addEventListener('ended', function() {
-      audioPlayer.parentNode.removeChild(audioPlayer);
-      e.target.id='';
-	  e.target.setAttribute('class', 'btn btn-primary');
-    }, false);
-  }
-
+audioBook.addEventListener('click', function(e){                       		//Ловим клик по табличке
+    var audioPlayer = document.querySelector('#player');          			//Выбираем аудиоэлемент
+    var numAudio = e.target.getAttribute('data-num');                 		//Считываем номер трека
+			
+		if (document.querySelector('#plaing')){								
+			if (e.target==document.querySelector('#plaing')) {
+				if (audioPlayer.paused) {
+					audioPlayer.play();
+				}else {
+					audioPlayer.pause();
+				}	
+			}else{
+				document.querySelector('tr.active').removeAttribute('class');
+				document.querySelector('#plaing').removeAttribute('id');
+				document.querySelector('#audio').removeChild(audioPlayer);
+				audioPlayer = document.createElement('audio');
+				audioPlayer.setAttribute('id', 'player');
+				var t = document.querySelector('#audio table.table.table-hover');
+				document.querySelector('#audio').insertBefore(audioPlayer, t);		
+				
+				e.target.parentNode.setAttribute('class', 'active');
+				audioPlayer.innerHTML = audioSrc[eval(numAudio)];
+				audioPlayer.play();
+			}	
+		}else{			
+			e.target.parentNode.setAttribute('class', 'active');                 	//Задаём стиль активного
+			audioPlayer.innerHTML = audioSrc[eval(numAudio)];						//Меняем трек после клика
+			audioPlayer.play();                                                     //Запускаем мелоию
+				
+			audioPlayer.addEventListener('ended', function(){
+				document.querySelector('tr.active').removeAttribute('class');
+				document.querySelector('#plaing').removeAttribute('id');
+				document.querySelector('#audio').removeChild(audioPlayer);
+				audioPlayer = document.createElement('audio');
+				audioPlayer.setAttribute('id', 'player');
+				var t = document.querySelector('#audio table.table.table-hover');
+				document.querySelector('#audio').insertBefore(audioPlayer, t);
+			}, false);
+		}
+	e.target.id = 'plaing';                                                 //Задаём id играющего
+		
 }, false);
 
- 
 
+//jukebox.addEventListener('click', function(e) {
+  //var songName = e.target.getAttribute('data-src');
+  //var audioPlayer = document.querySelector('#player');
 
+  //if (audioPlayer) {
 
+    //if (songName===audioPlayer.getAttribute('src')) {
+      //if (audioPlayer.paused) {
+        //audioPlayer.play();
+        //e.target.id = 'playing';
+		//e.target.setAttribute('class', 'btn btn-success');
+      //} else {
+        //audioPlayer.pause();
+        //e.target.id = 'paused';
+		//e.target.setAttribute('class', 'btn btn-warning');
+      //}
+    //} else {
+      //audioPlayer.src = songName;
+      //audioPlayer.play();
+      //if (document.querySelector('#playing')) {
+        //document.querySelector('#playing').setAttribute('class', 'btn btn-primary');
+		//document.querySelector('#playing').id='';
+      //} else {
+		//document.querySelector('#playing').setAttribute('class', 'btn btn-primary');
+        //document.querySelector('#paused').id='';
+      //}
+        //e.target.id = 'playing';
+    //}
+
+  //} else {
+    //var audioPlayer = document.createElement('audio');
+    //audioPlayer.id = 'player';
+    //e.target.id = 'playing';
+	//e.target.setAttribute('class', 'btn btn-success');
+
+    //audioPlayer.src = songName;
+    //document.body.appendChild(audioPlayer);
+    //audioPlayer.play();
+
+    //audioPlayer.addEventListener('ended', function() {
+      //audioPlayer.parentNode.removeChild(audioPlayer);
+      //e.target.id='';
+	  //e.target.setAttribute('class', 'btn btn-primary');
+    //}, false);
+  //}
+
+//}, false);

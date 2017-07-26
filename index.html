@@ -4,24 +4,24 @@
 
 	<head>
 	<meta charset="UTF-8"/>
-	<title>Табличка с книгами</title> 
-		
+	<title>Табличка с книгами</title>
+
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	
-	<link href="style.css" rel="stylesheet" type="css/text"/>
-	
+
+	<link href="style.css" rel="stylesheet" type="text/css">
+
 	<script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
-	
+
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	
-	
-	
+
+
+
 	</head>
 
 
@@ -36,7 +36,7 @@
 
 			</div>
 		</div>
-		
+
 		<div class="dropdown">
 			<button class="btn btn-warning dropdown-toggle" data-toggle="dropdown">Скрыть элементы<span class="caret"></span></button>
 			<ul class="dropdown-menu">
@@ -49,8 +49,8 @@
 				<li><a class="dropdown-footer">Вернуть всех</a></li>
 			</ul>
 		</div>
-			
-			
+
+
 				<div id="modal" class="modal fade" tabindex="-1">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -59,7 +59,7 @@
 							</div>
 							<div class="modal-body">
 								<div id="bodyModal" class="coll">
-									<p>1</p>									
+									<p>1</p>
 								</div>
 							</div>
 							<div class="modal-footer">
@@ -68,9 +68,9 @@
 						</div>
 					</div>
 				</div>
-		
+
 				<div class="container hideShow" id="julVern">
-					<div class="col"><h1 class="text-center text-primary">Пять недель на воздушном шаре</h1>	
+					<div class="col"><h1 class="text-center text-primary">Пять недель на воздушном шаре</h1>
 						<div class="row bg-success">
 							<ul class="nav nav-tabs" role="tablist">
 								<li class="active"><a href="#home" role="tab" data-toggle="tab">О Книге</a></li>
@@ -87,35 +87,22 @@
 										</div></h4>
 									</div>
 								</div>
-								<div role="tabpanel" class="tab-pane" id="audio" height="250">
-									<audio controls><source src="http://77.245.68.26/books/s1/Sentyabr_2014/pyat_nedel/1.mp3?st=SchWZdUo_tMPmfVcgIWIRw&amp;e=1501085394"></audio><br>
-									<div class="player btn-group-vertical">
-										<label class="btn btn-primary">Пять недель на воздушном шаре 1</label>
-										<label class="btn btn-primary">Пять недель на воздушном шаре 2</label>
-										<label class="btn btn-primary">Пять недель на воздушном шаре 3</label>
-										<label class="btn btn-primary">Пять недель на воздушном шаре 4</label>
-										<label class="btn btn-primary">Пять недель на воздушном шаре 5</label>
-										<label class="btn btn-primary">Пять недель на воздушном шаре 6</label>
-										<label class="btn btn-primary">Пять недель на воздушном шаре 7</label>
-										<label class="btn btn-primary">Пять недель на воздушном шаре 8</label>
-										<label class="btn btn-primary">Пять недель на воздушном шаре 9</label>
-										<label class="btn btn-primary">Пять недель на воздушном шаре 10</label>
-										<label class="btn btn-primary">Пять недель на воздушном шаре 11</label>
-										<label class="btn btn-primary">Пять недель на воздушном шаре 12</label>
-										<label class="btn btn-primary">Пять недель на воздушном шаре 13</label>
-										<label class="btn btn-primary">Пять недель на воздушном шаре 14</label>
-										<label class="btn btn-primary">Пять недель на воздушном шаре 15</label>										
-									</div>								
+								<div role="tabpanel" class="tab-pane" id="audio">
+									<audio id="player"></audio>
+									<table class="table table-hover default" height="250">
+										<tbody>
+										</tbody>
+									</table>
 								</div>
-							</div>							
+							</div>
 						</div>
 					</div>
 				</div>
-				
-						
-			
+
+
+
 			<div class="container hideShow" id="tomDemarco">
-				<div class="col"><h1 class="text-center text-primary">Deadline. Роман об управлении проектами</h1>	
+				<div class="col"><h1 class="text-center text-primary">Deadline. Роман об управлении проектами</h1>
 					<div class="row bg-success">
 						<div class="col-md-2"><div class="text-center"><img src="http://royallib.com/data/images/82/cover_82951.jpg"  width="160" height="170" hspace="20" align="middle" class="img-responsive"></img></div></div>
 						<div class="col-md-8"><h4 class="text-justify">Возможно, встречаются еще менеджеры, которые полагают, что управление — это собрания, программы обучения и повышения качества продукции и разнообразные отчеты. Однако в наше время стало очевидным, что управление проектами — это прежде всего работа с людьмиКак выбрать из множества кандидатов нужного вам человека? Каково оптимальное число людей в команде на разных этапах проекта? Как можно оптимизировать работу, если перед вами поставлены жесткие сроки? Как определять и решать конфликты? Как уволить человека, не обидев его? Какими качествами должен обладать хороший руководитель? Обо всем этом вы узнаете из данной книги, которая к тому же представляет собой не сухой научный труд, а увлекательный приключенческий роман!Книга адресована менеджерам по управлению проектами в области информационных технологий. </h4></div>
@@ -127,10 +114,10 @@
 					</div>
 				</div>
 			</div>
-			
-	
+
+
 			<div class="container hideShow" id="garryGarryson">
-				<div class="col"><h1 class="text-center text-primary">Стальная Крыса</h1>	
+				<div class="col"><h1 class="text-center text-primary">Стальная Крыса</h1>
 					<div class="row bg-success">
 						<div class="col-md-2"><div class="text-center"><img src="http://royallib.com/data/images/28/cover_28357.jpg"  width="160" height="170" hspace="20" align="middle" class="img-responsive"></img></div></div>
 						<div class="col-md-8"><h4 class="text-justify">«Не много во Вселенной людей похожих на меня. Я могу без каких-либо трудностей ограбить банк в любой звездной системе, и для меня не имеет никакого значения, охраняется ли он роботами или людьми. Могу втянуть капитана космического корабля в войну или, наоборот, предотвратить конфликт, зависит от того, за что больше заплатят. Меня на столько трудно поймать, что если, в конце концов, копы схватят меня, единственное, что они могут сделать со мной – сделать из меня копа…» </h4></div>
@@ -143,10 +130,10 @@
 					</div>
 				</div>
 			</div>
-				
-	 
+
+
 			<div class="container hideShow" id="anjeySapkovski">
-				<div class="col"><h1 class="text-center text-primary">Ведьмак</h1>	
+				<div class="col"><h1 class="text-center text-primary">Ведьмак</h1>
 					<div class="row bg-success">
 						<div class="col-md-2"><div class="text-center"><img src="http://img.yakaboo.ua/media/catalog/product/cache/1/small_image/140x210/9df78eab33525d08d6e5fb8d27136e95/3/8/38280_57545_3.jpg"  width="160" height="170" hspace="20" align="middle" class="img-responsive"></img></div></div>
 						<div class="col-md-8"><h4 class="text-justify">Одна из лучших фэнтези-саг за всю историю существования жанра.Оригинальное, масштабное эпическое произведение, одновременно и свободное от влияния извне, и связанное с классической мифологической, легендарной и сказовой традицией.Шедевр не только писательского мастерства Анджея Сапковского, но и переводческого искусства Евгения Павловича Вайсброта.«Сага о Геральте» - в одном томе.Бесценный подарок и для поклонника прекрасной фантастики, и для ценителя просто хорошей литературы.Перед читателем буквально оживает необычный, прекрасный и жестокий мир литературной легенда, в котором обитают эльфы и гномы, оборотни, вампиры и «низушки»-хоббиты, драконы и монстры, - но прежде всего люди.Очень близкие нам, понятные и человечные люди - такие как мастер меча ведьмак Геральт, его друг, беспутный менестрель Лютик, его возлюбленная, прекрасная чародейка Йеннифэр, и приемная дочь - безрассудно отважная юная Цири... </h4></div>
@@ -159,10 +146,10 @@
 					</div>
 				</div>
 			</div>
-				
-	
+
+
 			<div class="container hideShow" id="benTorp">
-				<div class="col"><h1 class="text-center text-primary">Нордическая мифология</h1>	
+				<div class="col"><h1 class="text-center text-primary">Нордическая мифология</h1>
 					<div class="row bg-success">
 						<div class="col-md-2"><div class="text-center"><img src="http://royallib.com/data/images/320/cover_320022.jpg"  width="160" height="170" hspace="20" align="middle" class="img-responsive"></img></div></div>
 						<div class="col-md-8"><h4 class="text-justify">Поистине волшебны и исполнены вечной тайны предания Севера — о феях и великанах, гномах и гоблинах, о сокрытых кладах: то ли самоцветах и золотых слитках, то ли о сокровищах мудрости…Уникальный, энциклопедически глубокий труд принадлежит перу знаменитого английского мифолога середины XIX века Бенджамина Торпа, сподвижника братьев Гримм и немецких романтиков. Он не устарел и поныне и станет прекрасным пособием для преподавателей и студентов, да и просто драгоценным подарком каждому ценителю колдовского обаяния древней Европы. </h4></div>
@@ -175,9 +162,9 @@
 					</div>
 				</div>
 			</div>
-		
+
 		<script type="text/javascript" src="index.js"></script>
-								
+
 	</body>
 
 </html>
