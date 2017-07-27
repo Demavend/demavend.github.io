@@ -97,39 +97,39 @@ audioBook.addEventListener('click', function(e){                       		//Ло�
     var audioPlayer = document.querySelector('#player');          			//Выбираем аудиоэлемент
     var numAudio = e.target.getAttribute('data-num');                 		//Считываем номер трека
 			
-		if (document.querySelector('#plaing')){								
-			if (e.target==document.querySelector('#plaing')) {
-				if (audioPlayer.paused) {
-					audioPlayer.play();
-				}else {
-					audioPlayer.pause();
+		if (document.querySelector('#plaing')){								//Если песня играет
+			if (e.target==document.querySelector('#plaing')) {				//Ловим клик на играющий элемент
+				if (audioPlayer.paused) {									//Если песня на паузе
+					audioPlayer.play();										//Начинаем играть
+				}else {														//Если песня играет
+					audioPlayer.pause();									//Ставим на паузу
 				}	
-			}else{
-				document.querySelector('tr.active').removeAttribute('class');
-				document.querySelector('#plaing').removeAttribute('id');
-				document.querySelector('#audio').removeChild(audioPlayer);
-				audioPlayer = document.createElement('audio');
-				audioPlayer.setAttribute('id', 'player');
-				var t = document.querySelector('#audio table.table.table-hover');
-				document.querySelector('#audio').insertBefore(audioPlayer, t);		
+			}else{																	//Ловим клик на другую песню
+				document.querySelector('tr.active').removeAttribute('class');		//Удаляем выделение
+				document.querySelector('#plaing').removeAttribute('id');			//Убираем id играющего
+				document.querySelector('#audio').removeChild(audioPlayer);			//Удаляем плеер
+				audioPlayer = document.createElement('audio');						//Создаем новый плеер
+				audioPlayer.setAttribute('id', 'player');							//Задаем плееру id
+				var t = document.querySelector('#audio table.table.table-hover');	//Выбираем таблицу
+				document.querySelector('#audio').insertBefore(audioPlayer, t);		//Вставляем плеер перед таблицей		
 				
-				e.target.parentNode.setAttribute('class', 'active');
-				audioPlayer.innerHTML = audioSrc[eval(numAudio)];
-				audioPlayer.play();
+				e.target.parentNode.setAttribute('class', 'active');				//Задаём стиль активного
+				audioPlayer.innerHTML = audioSrc[eval(numAudio)];					//Меняем трек после клика
+				audioPlayer.play();													//Запускаем мелоию
 			}	
-		}else{			
+		}else{																		//Если песня не включенв
 			e.target.parentNode.setAttribute('class', 'active');                 	//Задаём стиль активного
 			audioPlayer.innerHTML = audioSrc[eval(numAudio)];						//Меняем трек после клика
 			audioPlayer.play();                                                     //Запускаем мелоию
 				
-			audioPlayer.addEventListener('ended', function(){
-				document.querySelector('tr.active').removeAttribute('class');
-				document.querySelector('#plaing').removeAttribute('id');
-				document.querySelector('#audio').removeChild(audioPlayer);
-				audioPlayer = document.createElement('audio');
-				audioPlayer.setAttribute('id', 'player');
-				var t = document.querySelector('#audio table.table.table-hover');
-				document.querySelector('#audio').insertBefore(audioPlayer, t);
+			audioPlayer.addEventListener('ended', function(){						//Ждем завершения трека
+				document.querySelector('tr.active').removeAttribute('class');		//Удаляем выделение
+				document.querySelector('#plaing').removeAttribute('id');			//Убираем id играющего
+				document.querySelector('#audio').removeChild(audioPlayer);			//Удаляем плеер
+				audioPlayer = document.createElement('audio');						//Создаем новый плеер
+				audioPlayer.setAttribute('id', 'player');							//Задаем плееру id
+				var t = document.querySelector('#audio table.table.table-hover');	//Выбираем таблицу
+				document.querySelector('#audio').insertBefore(audioPlayer, t);		//Вставляем плеер перед таблицей
 			}, false);
 		}
 	e.target.id = 'plaing';                                                 //Задаём id играющего
@@ -137,50 +137,3 @@ audioBook.addEventListener('click', function(e){                       		//Ло�
 }, false);
 
 
-//jukebox.addEventListener('click', function(e) {
-  //var songName = e.target.getAttribute('data-src');
-  //var audioPlayer = document.querySelector('#player');
-
-  //if (audioPlayer) {
-
-    //if (songName===audioPlayer.getAttribute('src')) {
-      //if (audioPlayer.paused) {
-        //audioPlayer.play();
-        //e.target.id = 'playing';
-		//e.target.setAttribute('class', 'btn btn-success');
-      //} else {
-        //audioPlayer.pause();
-        //e.target.id = 'paused';
-		//e.target.setAttribute('class', 'btn btn-warning');
-      //}
-    //} else {
-      //audioPlayer.src = songName;
-      //audioPlayer.play();
-      //if (document.querySelector('#playing')) {
-        //document.querySelector('#playing').setAttribute('class', 'btn btn-primary');
-		//document.querySelector('#playing').id='';
-      //} else {
-		//document.querySelector('#playing').setAttribute('class', 'btn btn-primary');
-        //document.querySelector('#paused').id='';
-      //}
-        //e.target.id = 'playing';
-    //}
-
-  //} else {
-    //var audioPlayer = document.createElement('audio');
-    //audioPlayer.id = 'player';
-    //e.target.id = 'playing';
-	//e.target.setAttribute('class', 'btn btn-success');
-
-    //audioPlayer.src = songName;
-    //document.body.appendChild(audioPlayer);
-    //audioPlayer.play();
-
-    //audioPlayer.addEventListener('ended', function() {
-      //audioPlayer.parentNode.removeChild(audioPlayer);
-      //e.target.id='';
-	  //e.target.setAttribute('class', 'btn btn-primary');
-    //}, false);
-  //}
-
-//}, false);
