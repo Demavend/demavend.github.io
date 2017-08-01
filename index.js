@@ -4,14 +4,17 @@ var newDiv = [,,,,,,,,,];
 
 
 for (var i = 0; i < 10; i++){
-	booksElements.push($.ajax({
-		url:"https://www.googleapis.com/books/v1/volumes?q=javascript&orderBy=newest&filter=free-ebooks&startIndex=" + i + "&maxResults=1",
+	$.ajax({
+		url:"https://www.googleapis.com/books/v1/volumes?q=javascript&orderBy=newest&startIndex=" + i + "&maxResults=1",
 		dataType:"json",
+		success: function(data){
+			booksElements.push(data.items[0]);
+			newDiv[i] = document.createElement('div');
+			newDiv[i].innerHTML = '<div class="container"><div class="col"><h1 class="text-center text-primary">'+data.items[0].volumeInfo.title+'</h1><div class="row bg-success"><div class="col-md-2"><div class="text-center"><img src="'+data.items[0].volumeInfo.imageLinks.thumbnail+'" width="160" height="170" hspace="10" align="middle" class="img-responsive"></img></div></div><div class="col-md-8"><h4 class="text-justify">'+data.items[0].volumeInfo.description+'</h4></div><div class="col-md-2"><h4 class="text-center"><div class="col"><table height="200"><tr><td style="vertical-align: middle"><button class="btn btn-info openModal">Показать описание</button></td></tr></table></div></h4></div></div></div></div>';
+			document.body.appendChild(newDiv[i]);
+		},
 		type:"GET"
-	}));
-	newDiv[i] = document.createElement('div');
-	newDiv[i].innerHTML = '<div class="container"><div class="col"><h1 class="text-center text-primary"></h1><div class="row bg-success"><div class="col-md-2"><div class="text-center"><img src="" width="160" height="170" hspace="10" align="middle" class="img-responsive"></img></div></div><div class="col-md-8"><h4 class="text-justify"></h4></div><div class="col-md-2"><h4 class="text-center"><div class="col"><table height="200"><tr><td style="vertical-align: middle"><button class="btn btn-info openModal">Показать описание</button></td></tr></table></div></h4></div></div></div></div>';
-	document.body.appendChild(newDiv[i]);
+	});
 };
 
 
