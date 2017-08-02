@@ -4,7 +4,7 @@ var newDiv;
 
 var innerDiv = function(data, i){
 	newDiv = document.createElement('div');
-	newDiv.innerHTML = '<div class="container"><div class="col"><h1 class="text-center text-primary">'+data.items[i].volumeInfo.title+'</h1><div class="row bg-success"><div class="col-md-2 col-sd-2"><div class="text-center"><img src="'+data.items[i].volumeInfo.imageLinks.thumbnail+'" width="100%" height="100%" class="img-responsive"></img></div></div><div class="col-md-8 col-sd-8"><h4 class="text-justify">'+data.items[i].volumeInfo.description+'</h4></div><div class="col-md-2 col-sd-2"><h4 class="text-center"><div class="col"><table height="200"><tr><td style="vertical-align: middle"><button class="btn btn-info openModal" name='+i+'>Показать описание</button></td></tr></table></div></h4></div></div></div></div>';
+	newDiv.innerHTML = '<div class="container"><div class="col"><h1 class="text-center text-primary">'+data.items[i].volumeInfo.title+'</h1><div class="row bg-success"><div class="col-md-2 col-sd-2" style="text-align:center;"><img src="'+data.items[i].volumeInfo.imageLinks.thumbnail+'" width="100%" height="170" class="img-responsive"></img></div><div class="col-md-8 col-sd-8"><h4 class="text-justify">'+data.items[i].volumeInfo.description+'</h4></div><div class="col-md-2 col-sd-2" style="text-align:center;line-height:15em;"><button class="btn btn-info openModal" name='+i+'  >Показать описание</button></div></div></div></div>';
 	document.body.appendChild(newDiv);
 };
 
