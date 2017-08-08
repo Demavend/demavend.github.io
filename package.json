@@ -1,7 +1,6 @@
 {
   "name": "demavend.github.io",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "dependencies": {
     "bootstrap": "^3.3.7",
@@ -20,5 +19,6 @@
   "bugs": {
     "url": "https://github.com/Demavend/demavend.github.io/issues"
   },
-  "homepage": "https://github.com/Demavend/demavend.github.io#readme"
+  "homepage": "https://github.com/Demavend/demavend.github.io#readme",
+  "description": ""
 }
