@@ -1,18 +1,15 @@
 let items = [];
 let newDiv;
-const url = 'https://www.googleapis.com/books/v1/volumes?q='+
-'javascript&orderBy=newest&startIndex=0&maxResults=10';
+const url = 'https://www.googleapis.com/books/v1/volumes?q=' +
+    'javascript&orderBy=newest&startIndex=0&maxResults=10';
 const LAST = document.querySelector('#last');
-const createBlock = function(data, i) {
+const createBlock = (data, i) => {
     newDiv = document.createElement('div');
-    newDiv.innerHTML = '<div class="container"><div class="col"><h1 class="text-center text-primary">' +
-        data.title +
-        '</h1><div class="row bg-success"><div class="col-md-2"><img src="' +
-        data.imageLinks.thumbnail +
-        '"width="100%"  class="img-responsive"></img></div><div class="col-md-8"><h4 class="text-justify">' +
-        data.description +
-        '</h4></div><div class="col-md-2"><button class="btn btn-info openModal" name=' +
-        i + '>Show<br>summary</button></div></div></div></div>';
+    newDiv.innerHTML = `<div class="container"><div class="col"><h1 class="text-center text-primary">${data.title}` +
+        `</h1><div class="row bg-success"><div class="col-md-2"><img src="${data.imageLinks.thumbnail}` +
+        `"width="100%"  class="img-responsive"></img></div><div class="col-md-8"><h4 class="text-justify">${data.description}` +
+        `</h4></div><div class="col-md-2"><button class="btn btn-info openModal" name=${i}` +
+        `>Show<br>summary</button></div></div></div></div>`;
     document.body.insertBefore(newDiv, LAST);
 };
 
@@ -49,7 +46,7 @@ function modalContent(src) {
         fillingOfVoids(src.publishedDate);
 }
 
-document.body.addEventListener('click', function(e) {
+document.body.addEventListener('click', (e) => {
     if (e.target.getAttribute('class') === 'btn btn-info openModal') {
         var a = e.target.getAttribute('name');
         modalContent(items[a]);
