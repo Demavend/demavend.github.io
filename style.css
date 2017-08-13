@@ -5,3 +5,15 @@
 .openModal {
     margin-top: 90px;
 }
+
+.showMore {
+    display: none;
+    padding: 20px;
+}
+ #bookName{
+   width: 120px;
+ }
+
+ #bookshelf{
+   padding: 20px;
+ }
