@@ -1,5 +1,3 @@
-const MODAL_TOP = `<button class="close" data-dismiss="modal">x
-</button><h4 class='text-center text-primary'>`;
 const STEP = 10;
 const URL = (val, start, max) => {
     let url = `https://www.googleapis.com/books/v1/volumes?q=${val}
@@ -24,7 +22,6 @@ const CREATE_BLOCK = (data) => {
 let books = {};
 let serch;
 let startIndex = 0;
-
 function getBooks(src) {
     $.ajax({
         url: src,
@@ -46,15 +43,15 @@ function getBooks(src) {
                     }
                 } = data.items[i];
                 books[id] = {
-                    'Summary': {
-                        'Title': title || 'Unknown',
-                        'Author': authors || 'Unknown',
-                        'Category': categories || 'Unknown',
-                        'Publisher': publisher || 'Unknown',
-                        'Published date': publishedDate || 'Unknown'
+                    summary: {
+                        title: title || 'Unknown',
+                        author: authors || 'Unknown',
+                        category: categories || 'Unknown',
+                        publisher: publisher || 'Unknown',
+                        published_date: publishedDate || 'Unknown'
                     },
-                    'Description': description || 'Unknown',
-                    'Img': img || 'Unknown'
+                    description: description || 'Unknown',
+                    img: img || 'Unknown'
                 };
             };
             CREATE_BLOCK(books);
@@ -62,12 +59,13 @@ function getBooks(src) {
         type: 'GET'
     });
 };
-
 function modalContent(src) {
-    document.querySelector('.modal-header').innerHTML = `${MODAL_TOP}${src.Title}</h4>`;
+    document.querySelector('.modal-header').innerHTML = `<button class='close'
+    data-dismiss='modal'>x</button>
+    <h4 class='text-center text-primary'>${src.title}</h4>`;
     let book = '';
     for (let key in src) {
-        book += `${key}:  ${src[key]};<br>`;
+        book += `<span class='capitalize'>${key}</span>:  ${src[key]};<br>`;
     };
     document.querySelector('#bodyModal').innerHTML = book;
 };
@@ -78,7 +76,6 @@ document.querySelector('#bookshelf').addEventListener('click', (e) => {
         $('#modal').modal();
     }
 }, false);
-
 document.getElementById('btnSerch').addEventListener('click', (e) => {
     serch = document.getElementById('bookName').value;
     if (document.querySelector('div.panel-success')) {
@@ -88,12 +85,10 @@ document.getElementById('btnSerch').addEventListener('click', (e) => {
     };
     getBooks(URL(serch, startIndex, STEP));
 });
-
 document.getElementById('clean').addEventListener('click', (e) => {
     CLEAN();
     document.querySelector('.showMore').style.display = 'none';
 });
-
 document.querySelector('.showMore').addEventListener('click', (e) => {
   startIndex +=STEP;
   books = {};
