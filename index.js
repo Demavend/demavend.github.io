@@ -1,14 +1,14 @@
 const STEP = 10;
-const URL = (val, start, max) => {
+const fullUrl = (val, start, max) => {
     let url = `https://www.googleapis.com/books/v1/volumes?q=${val}
 &orderBy=newest&startIndex=${start}&maxResults=${max}`;
     return (url);
 };
-const CLEAN = () => {
+const clean = () => {
     $('div.panel-success').remove();
     books = {};
 };
-const CREATE_BLOCK = (data) => {
+const createBlock = (data) => {
     for (let key in data) {
         let newDiv = document.createElement('div');
         newDiv.innerHTML = `<div class="panel panel-success"><div class="panel-heading"><h1 class="text-center">${data[key].summary.title}` +
@@ -54,7 +54,7 @@ function getBooks(src) {
                     img: img || 'Unknown'
                 };
             };
-            CREATE_BLOCK(books);
+            createBlock(books);
         },
         type: 'GET'
     });
@@ -79,19 +79,19 @@ document.querySelector('#bookshelf').addEventListener('click', (e) => {
 document.getElementById('btnSerch').addEventListener('click', (e) => {
     serch = document.getElementById('bookName').value;
     if (document.querySelector('div.panel-success')) {
-        CLEAN();
+        clean();
     } else {
         document.querySelector('.showMore').style.display = 'block';
     };
-    getBooks(URL(serch, startIndex, STEP));
+    getBooks(fullUrl(serch, startIndex, STEP));
 });
 document.getElementById('clean').addEventListener('click', (e) => {
-    CLEAN();
+    clean();
     document.querySelector('.showMore').style.display = 'none';
 });
 
 document.querySelector('.showMore').addEventListener('click', (e) => {
   startIndex +=STEP;
   books = {};
-  getBooks(URL(serch, startIndex, STEP));
+  getBooks(fullUrl(serch, startIndex, STEP));
 });
