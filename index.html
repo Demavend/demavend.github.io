@@ -23,12 +23,13 @@
 								<span class="icon-bar"></span>
 							</button>
             </div>
-            <div id="navbar-collapse" class="collapse navbar-collapse navbar-right">
-                
-            </div>
+            <form id="navbar-collapse" class="navbar-form collapse navbar-collapse navbar-right">
+                <input id="bookName" type="text" placeholder="What to look for?">
+                <a id="btnSerch" class="btn btn-default">Serch</a>
+                <a id="clean" class="btn btn-default">Clean</a>
+            </form>
         </div>
     </div>
-
     <div id="modal" class="modal fade" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -46,10 +47,9 @@
             </div>
         </div>
     </div>
-
-
-
-    <div id="last"></div>
+    <div id="bookshelf" class="panel-group">
+    </div>
+    <div class="showMore"><button class="btn btn-primary btn-md btn-block"><span class="glyphicon glyphicon-plus-sign"></span> Show more</button></div>
     <script type="text/javascript" src="index.js"></script>
 </body>
 
