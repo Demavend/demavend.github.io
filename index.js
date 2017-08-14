@@ -89,7 +89,6 @@ document.getElementById('clean').addEventListener('click', (e) => {
     clean();
     document.querySelector('.showMore').style.display = 'none';
 });
-
 document.querySelector('.showMore').addEventListener('click', (e) => {
   startIndex +=STEP;
   books = {};
