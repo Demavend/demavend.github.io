@@ -11,9 +11,9 @@ const CLEAN = () => {
 const CREATE_BLOCK = (data) => {
     for (let key in data) {
         let newDiv = document.createElement('div');
-        newDiv.innerHTML = `<div class="panel panel-success"><div class="panel-heading"><h1 class="text-center">${data[key].Summary.Title}` +
-            `</h1></div><div class="panel-body"><div class="col-md-2"><img src="${data[key].Img}` +
-            `"width="100%"  class="img-responsive"></img></div><div class="col-md-8"><h4 class="text-justify">${data[key].Description}` +
+        newDiv.innerHTML = `<div class="panel panel-success"><div class="panel-heading"><h1 class="text-center">${data[key].summary.title}` +
+            `</h1></div><div class="panel-body"><div class="col-md-2"><img src="${data[key].img}` +
+            `"width="100%"  class="img-responsive"></img></div><div class="col-md-8"><h4 class="text-justify">${data[key].description}` +
             `</h4></div><div class="col-md-2"><button class="btn btn-info openModal" id=${key}` +
             `>Show<br>summary</button></div></div></div>`;
         document.querySelector('#bookshelf').appendChild(newDiv);
@@ -72,9 +72,9 @@ function modalContent(src) {
 document.querySelector('#bookshelf').addEventListener('click', (e) => {
     if (e.target.getAttribute('class') === 'btn btn-info openModal') {
         let id = e.target.id;
-        modalContent(books[id].Summary);
+        modalContent(books[id].summary);
         $('#modal').modal();
-    }
+    };
 }, false);
 document.getElementById('btnSerch').addEventListener('click', (e) => {
     serch = document.getElementById('bookName').value;
@@ -89,6 +89,7 @@ document.getElementById('clean').addEventListener('click', (e) => {
     CLEAN();
     document.querySelector('.showMore').style.display = 'none';
 });
+
 document.querySelector('.showMore').addEventListener('click', (e) => {
   startIndex +=STEP;
   books = {};
