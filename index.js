@@ -39,7 +39,7 @@ class bookshelf {
     constructor(data) {
         for (let i = 0; i < data.items.length; i++) {
             let {
-                etag: id,
+                id: id,
                 volumeInfo: {
                     title,
                     categories,
@@ -67,20 +67,20 @@ class bookshelf {
     };
     showBlocks() {
         if (document.querySelector('div.panel-success')) {
-            clean();
+            $('div.panel-success').remove();
         } else {
             document.querySelector('.showMore').style.display = 'block';
         };
         createBlock(books);
     };
     showMore() {
-
         createBlock(books);
     };
 };
 
 document.getElementById('btnSerch').addEventListener('click', (e) => {
     serch = document.getElementById('bookName').value;
+    books = {};
     getBooks(fullUrl(serch, startIndex, STEP)).then(response => {
         let book = new bookshelf(response);
         book.showBlocks();
@@ -98,8 +98,6 @@ document.getElementById('clean').addEventListener('click', (e) => {
     clean();
     document.querySelector('.showMore').style.display = 'none';
 });
-
-
 function modalContent(src) {
     document.querySelector('.modal-header').innerHTML = `<button class='close'
     data-dismiss='modal'>x</button>
