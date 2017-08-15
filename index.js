@@ -22,43 +22,84 @@ const createBlock = (data) => {
 let books = {};
 let serch;
 let startIndex = 0;
+
 function getBooks(src) {
-    $.ajax({
-        url: src,
-        dataType: 'json',
-        success: (data) => {
-            for (let i = 0; i < data.items.length; i++) {
-                let {
-                    etag: id,
-                    volumeInfo: {
-                        title,
-                        categories,
-                        publisher,
-                        publishedDate,
-                        authors,
-                        description,
-                        imageLinks: {
-                            thumbnail: img,
-                        }
-                    }
-                } = data.items[i];
-                books[id] = {
-                    summary: {
-                        title: title || 'Unknown',
-                        author: authors || 'Unknown',
-                        category: categories || 'Unknown',
-                        publisher: publisher || 'Unknown',
-                        published_date: publishedDate || 'Unknown'
-                    },
-                    description: description || 'Unknown',
-                    img: img || 'Unknown'
-                };
-            };
-            createBlock(books);
-        },
-        type: 'GET'
+    return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', src);
+        xhr.responseType = 'json';
+        xhr.addEventListener('load', () => {
+            resolve(xhr.response);
+        });
+        xhr.send();
     });
 };
+
+class bookshelf {
+    constructor(data) {
+        for (let i = 0; i < data.items.length; i++) {
+            let {
+                etag: id,
+                volumeInfo: {
+                    title,
+                    categories,
+                    publisher,
+                    publishedDate,
+                    authors,
+                    description,
+                    imageLinks: {
+                        thumbnail: img,
+                    }
+                }
+            } = data.items[i];
+            books[id] = {
+                summary: {
+                    title: title || 'Unknown',
+                    author: authors || 'Unknown',
+                    category: categories || 'Unknown',
+                    publisher: publisher || 'Unknown',
+                    published_date: publishedDate || 'Unknown'
+                },
+                description: description || 'Unknown',
+                img: img || 'Unknown'
+            };
+        };
+    };
+    showBlocks() {
+        if (document.querySelector('div.panel-success')) {
+            clean();
+        } else {
+            document.querySelector('.showMore').style.display = 'block';
+        };
+        createBlock(books);
+    };
+    showMore() {
+
+        createBlock(books);
+    };
+};
+
+document.getElementById('btnSerch').addEventListener('click', (e) => {
+    serch = document.getElementById('bookName').value;
+    getBooks(fullUrl(serch, startIndex, STEP)).then(response => {
+        let book = new bookshelf(response);
+        book.showBlocks();
+    });
+});
+document.querySelector('.showMore').addEventListener('click', (e) => {
+    startIndex += STEP;
+    books = {};
+    getBooks(fullUrl(serch, startIndex, STEP)).then(response => {
+        let book = new bookshelf(response);
+        book.showMore();
+    });
+});
+document.getElementById('clean').addEventListener('click', (e) => {
+    clean();
+    document.querySelector('.showMore').style.display = 'none';
+});
+
+
 function modalContent(src) {
     document.querySelector('.modal-header').innerHTML = `<button class='close'
     data-dismiss='modal'>x</button>
@@ -76,21 +117,3 @@ document.querySelector('#bookshelf').addEventListener('click', (e) => {
         $('#modal').modal();
     };
 }, false);
-document.getElementById('btnSerch').addEventListener('click', (e) => {
-    serch = document.getElementById('bookName').value;
-    if (document.querySelector('div.panel-success')) {
-        clean();
-    } else {
-        document.querySelector('.showMore').style.display = 'block';
-    };
-    getBooks(fullUrl(serch, startIndex, STEP));
-});
-document.getElementById('clean').addEventListener('click', (e) => {
-    clean();
-    document.querySelector('.showMore').style.display = 'none';
-});
-document.querySelector('.showMore').addEventListener('click', (e) => {
-  startIndex +=STEP;
-  books = {};
-  getBooks(fullUrl(serch, startIndex, STEP));
-});
