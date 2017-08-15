@@ -15,10 +15,14 @@
     text-transform: capitalize;
 }
 
- #bookName{
-   width: 120px;
- }
+form.pagination {
+    display: none;
+}
 
- #bookshelf{
-   padding: 20px;
- }
+#bookName {
+    width: 120px;
+}
+
+#bookshelf {
+    padding: 20px;
+}

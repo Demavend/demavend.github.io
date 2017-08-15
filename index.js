@@ -23,6 +23,7 @@ const createBlock = (data) => {
 let responseResult;
 let serch;
 let startIndex = 0;
+let totalItems = 0;
 
 function arrangmrntBooks(data) {
     let books = [];
@@ -64,6 +65,8 @@ function getBooks(src) {
         xhr.responseType = 'json';
         xhr.addEventListener('load', () => {
             resolve(xhr.response);
+            totalItems = xhr.response.totalItems;
+            //let pageNum = Math.ceil(totalItems/STEP);
         });
         xhr.send();
     });
@@ -79,6 +82,7 @@ document.getElementById('btnSerch').addEventListener('click', (e) => {
         createBlock(responseResult);
     });
     document.querySelector('.showMore').style.display = 'block';
+    document.querySelector('form.pagination').style.display = 'block';
 });
 document.getElementById('clean').addEventListener('click', (e) => {
     clean();
