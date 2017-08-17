@@ -7,55 +7,42 @@ const fullUrl = (val, start, max) => {
 const clean = () => {
     $('div.panel-success').remove();
     document.querySelector('.showMore').style.display = 'none';
+    document.querySelector('form.pagination').style.display = 'none';
     responseResult = [];
 };
-const createBlock = (data) => {
-    for (let key in data) {
-        let newDiv = document.createElement('div');
-        newDiv.innerHTML = `<div class="panel panel-success"><div class="panel-heading"><h1 class="text-center">${data[key].summary.title}` +
-            `</h1></div><div class="panel-body"><div class="col-md-2"><img src="${data[key].img}` +
-            `"width="100%"  class="img-responsive"></img></div><div class="col-md-8"><h4 class="text-justify">${data[key].description}` +
-            `</h4></div><div class="col-md-2"><button class="btn btn-info openModal" id=${data[key].id}` +
-            `>Show<br>summary</button></div></div></div>`;
-        document.querySelector('#bookshelf').appendChild(newDiv);
-    }
-};
-let responseResult;
+
+let responseResult = [];
 let serch;
 let startIndex = 0;
 let totalItems = 0;
 
-function arrangmrntBooks(data) {
-    let books = [];
-    for (let i = 0; i < data.items.length; i++) {
-        let {
-            id,
-            volumeInfo: {
-                title,
-                categories,
-                publisher,
-                publishedDate,
-                authors,
-                description,
-                imageLinks: {
-                    thumbnail: img,
-                }
-            }
-        } = data.items[i];
-        books.push({
-            id,
+
+
+class Book {
+    constructor(data) {
+        this.books = {
+            id: data.id,
             summary: {
-                title: title || 'Unknown',
-                author: authors || 'Unknown',
-                category: categories || 'Unknown',
-                publisher: publisher || 'Unknown',
-                published_date: publishedDate || 'Unknown'
+                title: data.volumeInfo.title || 'Top secret (apparently).',
+                author: data.volumeInfo.authors || 'Your name could be here.',
+                category: data.volumeInfo.categories || 'Not like everyone else.',
+                publisher: data.volumeInfo.publisher || 'Did not pay for advertising.',
+                date: data.volumeInfo.publishedDate || 'It was a long time ago in a galaxy far far away...',
             },
-            description: description || 'Unknown',
-            img: img || 'Unknown'
-        });
+            description: data.volumeInfo.description || 'If you read this we will have to kill you. Enjoy!',
+            img: data.volumeInfo.imageLinks.thumbnail || '',
+        }
+    }
+    createBlock() {
+        responseResult.push(this.books);
+        let newDiv = document.createElement('div');
+        newDiv.innerHTML = `<div class="panel panel-success"><div class="panel-heading"><h1 class="text-center">${this.books.summary.title}` +
+            `</h1></div><div class="panel-body"><div class="col-md-2"><img src="${this.books.img}` +
+            `"width="100%"  class="img-responsive"></img></div><div class="col-md-8"><h4 class="text-justify">${this.books.description}` +
+            `</h4></div><div class="col-md-2"><button class="btn btn-info openModal" id=${this.books.id}` +
+            `>Show<br>summary</button></div></div></div>`;
+        document.querySelector('#bookshelf').appendChild(newDiv);
     };
-    return books;
 };
 
 function getBooks(src) {
@@ -78,12 +65,17 @@ document.getElementById('btnSerch').addEventListener('click', (e) => {
         clean();
     };
     getBooks(fullUrl(serch, startIndex, STEP)).then(response => {
-        responseResult = arrangmrntBooks(response);
-        createBlock(responseResult);
+        response.items.forEach((item) => {
+            console.log(item);
+            let book = new Book(item);
+            book.createBlock();
+        });
     });
     document.querySelector('.showMore').style.display = 'block';
     document.querySelector('form.pagination').style.display = 'block';
 });
+
+
 document.getElementById('clean').addEventListener('click', (e) => {
     clean();
 });
@@ -91,7 +83,7 @@ document.querySelector('.showMore').addEventListener('click', (e) => {
     startIndex += STEP;
     getBooks(fullUrl(serch, startIndex, STEP)).then(response => {
         responseResult = responseResult.concat(arrangmrntBooks(response));
-        let books = arrangmrntBooks(response);
+        //let books = arrangmrntBooks(response);
         createBlock(books);
     });
 });
@@ -100,9 +92,9 @@ function modalContent(src) {
     document.querySelector('.modal-header').innerHTML = `<button class='close'
     data-dismiss='modal'>x</button>
     <h4 class='text-center text-primary'>${src.title}</h4>`;
-    let book = '';
+    //let book = '';
     for (let key in src) {
-        book += `<span class='capitalize'>${key}</span>:  ${src[key]};<br>`;
+        //book += `<span class='capitalize'>${key}</span>:  ${src[key]};<br>`;
     };
     document.querySelector('#bodyModal').innerHTML = book;
 };
