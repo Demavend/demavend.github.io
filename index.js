@@ -1,4 +1,5 @@
 const STEP = 10;
+const PAGE_MAX = 5
 const fullUrl = (val, start, max) => {
     let url = `https://www.googleapis.com/books/v1/volumes?q=${val}
 &startIndex=${start}&maxResults=${max}`;
@@ -9,11 +10,14 @@ const clean = () => {
     document.querySelector('.showMore').style.display = 'none';
     document.querySelector('form.pagination').style.display = 'none';
     responseResult = [];
+    moreCount = 1;
 };
 let responseResult = [];
 let serch;
+let pageMax = 0;
 let startIndex = 0;
 let totalItems = 0;
+let moreCount = 1;
 class Book {
     constructor(data) {
         this.books = {
@@ -49,7 +53,7 @@ function getBooks(src) {
         xhr.addEventListener('load', () => {
             resolve(xhr.response);
             totalItems = xhr.response.totalItems;
-            //let pageNum = Math.ceil(totalItems/STEP);
+            pageNum = Math.ceil(totalItems / STEP);
         });
         xhr.send();
     });
@@ -71,15 +75,6 @@ document.getElementById('btnSerch').addEventListener('click', (e) => {
 document.getElementById('clean').addEventListener('click', (e) => {
     clean();
 });
-document.querySelector('.showMore').addEventListener('click', (e) => {
-    startIndex += STEP;
-    getBooks(fullUrl(serch, startIndex, STEP)).then(response => {
-        response.items.forEach((item) => {
-            let book = new Book(item);
-            book.createBlock();
-        });
-    });
-});
 
 function modalContent(src) {
     document.querySelector('.modal-header').innerHTML = `<button class='close'
@@ -100,3 +95,25 @@ document.querySelector('#bookshelf').addEventListener('click', (e) => {
         $('#modal').modal();
     }
 }, false);
+function warningPage(){
+  document.querySelector('.modal-header').innerHTML = `<button class='close'
+  data-dismiss='modal'>x</button>`;
+  document.querySelector('#bodyModal').innerHTML = `<h3 class='text-danger'>
+  Warning! You have max result on the page.</h3>`;
+};
+
+document.querySelector('.showMore').addEventListener('click', (e) => {
+    startIndex += STEP;
+    if (moreCount < PAGE_MAX) {
+        getBooks(fullUrl(serch, startIndex, STEP)).then(response => {
+            response.items.forEach((item) => {
+                let book = new Book(item);
+                book.createBlock();
+            });
+        });
+        moreCount++;
+    }else {
+      warningPage();
+      $('#modal').modal();
+    };
+});
