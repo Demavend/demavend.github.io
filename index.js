@@ -16,8 +16,15 @@ let responseResult = [];
 let serch;
 let pageMax = 0;
 let startIndex = 0;
-let totalItems = 0;
+//let totalItems = 0;
 let moreCount = 1;
+let init = function(e) {
+    Pagination.Init(document.querySelector('ul.pagination'), {
+        size: pageNum,
+        page: e,
+        step: 1
+    });
+};
 class Book {
     constructor(data) {
         this.books = {
@@ -52,12 +59,13 @@ function getBooks(src) {
         xhr.responseType = 'json';
         xhr.addEventListener('load', () => {
             resolve(xhr.response);
-            totalItems = xhr.response.totalItems;
-            pageNum = Math.ceil(totalItems / STEP);
+            //totalItems = xhr.response.totalItems;
+            pageNum = Math.ceil(xhr.response.totalItems / STEP);
         });
         xhr.send();
     });
 };
+
 document.getElementById('btnSerch').addEventListener('click', (e) => {
     serch = document.getElementById('bookName').value;
     if (document.querySelector('div.panel-success')) {
@@ -67,6 +75,7 @@ document.getElementById('btnSerch').addEventListener('click', (e) => {
         response.items.forEach((item) => {
             let book = new Book(item);
             book.createBlock();
+            init(1);
         });
     });
     document.querySelector('.showMore').style.display = 'block';
@@ -95,7 +104,7 @@ document.querySelector('#bookshelf').addEventListener('click', (e) => {
         $('#modal').modal();
     }
 }, false);
-function warningPage(){
+/*function warningPage(){
   document.querySelector('.modal-header').innerHTML = `<button class='close'
   data-dismiss='modal'>x</button>`;
   document.querySelector('#bodyModal').innerHTML = `<h3 class='text-danger'>
@@ -116,4 +125,111 @@ document.querySelector('.showMore').addEventListener('click', (e) => {
       warningPage();
       $('#modal').modal();
     };
+});*/
+
+let Pagination = {
+    code: '',
+    Extend: function(data) {
+        data = data || {};
+        Pagination.size = data.size || 300;
+        Pagination.page = data.page || 1;
+        Pagination.step = data.step || 1;
+    },
+    Add: function(s, f) {
+        for (let i = s; i < f; i++) {
+            Pagination.code += '<li><a class="page">' + i + '</a></li>';
+        }
+    },
+    Last: function() {
+        Pagination.code += /*'<li><i>...</i></li>*/ '<li><a class="page">' +
+            Pagination.size + '</a></li>';
+    },
+    First: function() {
+        Pagination.code += '<li><a>1</a></li><li><i>...</i></li>';
+    },
+    Click: function() {
+        Pagination.page = +this.innerHTML;
+        Pagination.Start();
+    },
+    Prev: function() {
+        Pagination.page--;
+        if (Pagination.page < 1) {
+            Pagination.page = 1;
+        }
+        Pagination.Start();
+    },
+    Next: function() {
+        Pagination.page++;
+        if (Pagination.page > Pagination.size) {
+            Pagination.page = Pagination.size;
+        }
+        Pagination.Start();
+    },
+    Bind: function(e) {
+        let a = e.querySelector('a.page');
+        for (let i = 0; i < a.length; i++) {
+            if (+a[i].innerHTML === Pagination.page) a[i].className = 'active';
+            a[i].addEventListener('click', Pagination.Click, false);
+        }
+    },
+    Finish: function(e) {
+        e.querySelector('li.firstPage').insertAdjacentHTML('afterend', Pagination.code);
+        Pagination.code = '';
+        Pagination.Bind(e);
+    },
+    Start: function(e) {
+        if (Pagination.size < Pagination.step * 2 + 6) {
+            Pagination.Add(1, Pagination.size + 1);
+            console.log(1);
+        } else if (Pagination.page < Pagination.step * 2 + 1) {
+            Pagination.Add(1, Pagination.step * 2 + 4);
+            Pagination.Last();
+            console.log(2);
+        } else if (Pagination.page > Pagination.size - Pagination.step * 2) {
+            Pagination.First();
+            Pagination.Add(Pagination.size - Pagination.step * 2 - 2, Pagination.size + 1);
+            console.log(3);
+        } else {
+            Pagination.First();
+            Pagination.Add(Pagination.page - Pagination.step, Pagination.page + Pagination.step + 1);
+            Pagination.Last();
+            console.log(4);
+        }
+        Pagination.Finish(e);
+    },
+    Buttons: function(e) {
+        let nav = e.getElementsByTagName('a');
+        nav[0].addEventListener('click', Pagination.Prev, false);
+        nav[1].addEventListener('click', Pagination.Next, false);
+    },
+    Create: function(e) {
+        let html = [
+            '<li class="firstPage"><a>&laquo;</a></li>',
+            //'<span class="pagination-body"></span>',
+            '<li><a>&raquo;</a><li>'
+        ];
+        e.innerHTML = html.join('');
+        //let pagBody = e.querySelector('span.pagination-body')[0];
+        Pagination.Buttons(e);
+    },
+    Init: function(e, data) {
+        Pagination.Extend(data);
+        Pagination.Create(e);
+        Pagination.Start(e);
+    }
+};
+document.querySelector('ul.pagination').addEventListener('click', (e) => {
+    let text = e.target.textContent;
+    console.log(text);
+    init(text);
 });
+
+/*let init = function() {
+    Pagination.Init(document.querySelector('ul.pagination'), {
+        size: pageNum,
+        page: 1,
+        step: 1
+    });
+};*/
+
+//document.addEventListener('DOMContentLoaded', init, false);
