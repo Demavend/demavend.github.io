@@ -16,7 +16,7 @@ let responseResult = [];
 let serch;
 let pageMax = 0;
 let startIndex = 0;
-//let totalItems = 0;
+let totalItems = 0;
 let moreCount = 1;
 let init = function(e) {
     Pagination.Init(document.querySelector('ul.pagination'), {
@@ -37,7 +37,7 @@ class Book {
                 date: data.volumeInfo.publishedDate || 'It was a long time ago in a galaxy far far away...',
             },
             description: data.volumeInfo.description || 'If you read this we will have to kill you. Enjoy!',
-            img: data.volumeInfo.imageLinks.thumbnail || '',
+            img: data.volumeInfo.imageLinks.thumbnail || '#',
         }
     }
     createBlock() {
@@ -53,14 +53,16 @@ class Book {
 };
 
 function getBooks(src) {
+    console.log(src);
     return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();
         xhr.open('GET', src);
         xhr.responseType = 'json';
         xhr.addEventListener('load', () => {
             resolve(xhr.response);
-            //totalItems = xhr.response.totalItems;
+            totalItems = xhr.response.totalItems;
             pageNum = Math.ceil(xhr.response.totalItems / STEP);
+            console.log(xhr.response);
         });
         xhr.send();
     });
@@ -141,11 +143,11 @@ let Pagination = {
         }
     },
     Last: function() {
-        Pagination.code += /*'<li><i>...</i></li>*/ '<li><a class="page">' +
+        Pagination.code += '<li class="disabled"><a>...</a></li><li><a class="page">' +
             Pagination.size + '</a></li>';
     },
     First: function() {
-        Pagination.code += '<li><a>1</a></li><li><i>...</i></li>';
+        Pagination.code += '<li><a class="page">1</a></li><li class="disabled"><a>...</a></li>';
     },
     Click: function() {
         Pagination.page = +this.innerHTML;
@@ -166,34 +168,31 @@ let Pagination = {
         Pagination.Start();
     },
     Bind: function(e) {
-        let a = e.querySelector('a.page');
+        let a = document.querySelectorAll('a.page');
         for (let i = 0; i < a.length; i++) {
-            if (+a[i].innerHTML === Pagination.page) a[i].className = 'active';
-            a[i].addEventListener('click', Pagination.Click, false);
+            if (Number(a[i].firstChild.data) === Number(e)) {
+                a[i].parentNode.setAttribute('class', 'active');
+            }
         }
     },
     Finish: function(e) {
-        e.querySelector('li.firstPage').insertAdjacentHTML('afterend', Pagination.code);
+        e.querySelector('li.prev').insertAdjacentHTML('afterend', Pagination.code);
         Pagination.code = '';
-        Pagination.Bind(e);
+        Pagination.Bind(Pagination.page);
     },
     Start: function(e) {
         if (Pagination.size < Pagination.step * 2 + 6) {
             Pagination.Add(1, Pagination.size + 1);
-            console.log(1);
-        } else if (Pagination.page < Pagination.step * 2 + 1) {
+        } else if (Pagination.page < Pagination.step * 2 + 2) {
             Pagination.Add(1, Pagination.step * 2 + 4);
             Pagination.Last();
-            console.log(2);
-        } else if (Pagination.page > Pagination.size - Pagination.step * 2) {
+        } else if (Pagination.page > Pagination.size - Pagination.step * 2 - 1) {
             Pagination.First();
             Pagination.Add(Pagination.size - Pagination.step * 2 - 2, Pagination.size + 1);
-            console.log(3);
         } else {
             Pagination.First();
             Pagination.Add(Pagination.page - Pagination.step, Pagination.page + Pagination.step + 1);
             Pagination.Last();
-            console.log(4);
         }
         Pagination.Finish(e);
     },
@@ -204,12 +203,10 @@ let Pagination = {
     },
     Create: function(e) {
         let html = [
-            '<li class="firstPage"><a>&laquo;</a></li>',
-            //'<span class="pagination-body"></span>',
-            '<li><a>&raquo;</a><li>'
+            '<li class="prev"><a>Prev</a></li>',
+            '<li class="next"><a>Next</a><li>'
         ];
         e.innerHTML = html.join('');
-        //let pagBody = e.querySelector('span.pagination-body')[0];
         Pagination.Buttons(e);
     },
     Init: function(e, data) {
@@ -219,9 +216,28 @@ let Pagination = {
     }
 };
 document.querySelector('ul.pagination').addEventListener('click', (e) => {
-    let text = e.target.textContent;
-    console.log(text);
-    init(text);
+  console.log(e.target);
+    if (e.target.getAttribute('class') === 'page') {
+        let text = Number(e.target.textContent);
+        if (document.querySelector('div.panel-success')) {
+            clean();
+        };
+        startIndex = (text - 1) * STEP;
+        getBooks(fullUrl(serch, startIndex, STEP)).then(response => {
+            response.items.forEach((item) => {
+                let book = new Book(item);
+                book.createBlock();
+            });
+        });
+        document.querySelector('.showMore').style.display = 'block';
+        document.querySelector('form.pagination').style.display = 'block';
+        init(text);
+    }else if (e.targetget.Attribute('class') === 'prev') {
+      if(document.querySelector('li.active').firstChild){
+        console.log(document.querySelector('li.active').firstChild);
+      }
+
+    };
 });
 
 /*let init = function() {
