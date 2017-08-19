@@ -5,11 +5,20 @@ const fullUrl = (val, start, max) => {
 &startIndex=${start}&maxResults=${max}`;
     return (url);
 };
+const navBar = document.querySelector('.pagination');
 const clean = () => {
     $('div.panel-success').parent().remove();
-    document.querySelector('.pagination').style.display = 'none';
+    navBar.style.display = 'none';
     responseResult = [];
     moreCount = 1;
+};
+const getBooksInit = () => {
+    getBooks(fullUrl(serch, startIndex, STEP)).then(response => {
+        response.items.forEach((item) => {
+            let book = new Book(item);
+            book.createBlock();
+        });
+    });
 };
 let responseResult = [];
 let serch;
@@ -45,13 +54,11 @@ class Book {
 
 function getBooks(src) {
     return new Promise((resolve, reject) => {
-        console.log(src);
         let xhr = new XMLHttpRequest();
         xhr.open('GET', src);
         xhr.responseType = 'json';
         xhr.addEventListener('load', () => {
             resolve(xhr.response);
-            console.log(xhr.response);
         });
         xhr.send();
     });
@@ -62,13 +69,8 @@ document.getElementById('btnSerch').addEventListener('click', (e) => {
     if (document.querySelector('div.panel-success')) {
         clean();
     };
-    getBooks(fullUrl(serch, startIndex, STEP)).then(response => {
-        response.items.forEach((item) => {
-            let book = new Book(item);
-            book.createBlock();
-        });
-    });
-    document.querySelector('.pagination').style.display = 'block';
+    getBooksInit();
+    navBar.style.display = 'block';
 });
 document.getElementById('clean').addEventListener('click', (e) => {
     clean();
@@ -99,12 +101,7 @@ document.querySelector('.pagination').addEventListener('click', (e) => {
     if (e.target.getAttribute('data-id') === 'more') {
         startIndex += STEP;
         if (moreCount < PAGE_MAX) {
-            getBooks(fullUrl(serch, startIndex, STEP)).then(response => {
-                response.items.forEach((item) => {
-                    let book = new Book(item);
-                    book.createBlock();
-                });
-            });
+            getBooksInit();
             moreCount++;
         } else {
             document.querySelector('button.disabled').setAttribute('class', 'btn btn-default');
@@ -113,41 +110,26 @@ document.querySelector('.pagination').addEventListener('click', (e) => {
             for (let i = 0; i < STEP; i++) {
                 parent.removeChild(parent.firstChild);
             };
-            getBooks(fullUrl(serch, startIndex, STEP)).then(response => {
-                response.items.forEach((item) => {
-                    let book = new Book(item);
-                    book.createBlock();
-                });
-            });
+            getBooksInit();
             moreCount++;
         };
     } else if (e.target.getAttribute('data-id') === 'next') {
-        if (document.querySelector('button.btn.btn-default.disabled')) {
+        if (document.querySelector('button.disabled')) {
             document.querySelector('button.disabled').setAttribute('class', 'btn btn-default');
         };
         clean();
         startIndex += STEP;
-        getBooks(fullUrl(serch, startIndex, STEP)).then(response => {
-            response.items.forEach((item) => {
-                let book = new Book(item);
-                book.createBlock();
-            });
-        });
+        getBooksInit();
         moreCount++;
-        document.querySelector('.pagination').style.display = 'block';
+        navBar.style.display = 'block';
     } else {
         clean();
         startIndex -= STEP;
         if (startIndex === 0) {
             e.target.setAttribute('class', 'btn btn-default disabled');
         }
-        getBooks(fullUrl(serch, startIndex, STEP)).then(response => {
-            response.items.forEach((item) => {
-                let book = new Book(item);
-                book.createBlock();
-            });
-        });
+        getBooksInit();
         moreCount--;
-        document.querySelector('.pagination').style.display = 'block';
+        navBar.style.display = 'block';
     };
 });
