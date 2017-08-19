@@ -27,7 +27,8 @@ class Book {
                 date: data.volumeInfo.publishedDate || 'It was a long time ago in a galaxy far far away...',
             },
             description: data.volumeInfo.description || 'If you read this we will have to kill you. Enjoy!',
-            img: data.volumeInfo.imageLinks.thumbnail || 'https://books.google.com/googlebooks/images/no_cover_thumb.gif',
+            img: (!data.volumeInfo.imageLinks || !data.volumeInfo.imageLinks.thumbnail) ?
+                'https://books.google.com/googlebooks/images/no_cover_thumb.gif' : data.volumeInfo.imageLinks.thumbnail
         }
     }
     createBlock() {
@@ -44,11 +45,13 @@ class Book {
 
 function getBooks(src) {
     return new Promise((resolve, reject) => {
+        console.log(src);
         let xhr = new XMLHttpRequest();
         xhr.open('GET', src);
         xhr.responseType = 'json';
         xhr.addEventListener('load', () => {
             resolve(xhr.response);
+            console.log(xhr.response);
         });
         xhr.send();
     });
