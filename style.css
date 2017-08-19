@@ -2,26 +2,23 @@
     text-align: center;
 }
 
-.col-md-8{
-  height: 250px;
-  overflow: auto;
+.col-md-8 {
+    height: 250px;
+    overflow: auto;
 }
 
 .openModal {
     margin-top: 90px;
 }
 
-.showMore {
-    display: none;
-    padding: 20px;
-}
-
 .capitalize {
     text-transform: capitalize;
 }
 
-form.pagination {
+.pagination {
     display: none;
+    width: 100%;
+    text-align: center;
 }
 
 #bookName {
