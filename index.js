@@ -71,7 +71,7 @@ function getBooks(src) {
     });
 };
 
-document.getElementById('btnSerch').addEventListener('click', () => {
+document.getElementById('btnSearch').addEventListener('click', () => {
     search = input.value;
     if (document.querySelector('div.panel-success')) clean();
     getBooksInit();
