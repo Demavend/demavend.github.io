@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="navbar navbar-default">
+    <div class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="">GB api navigator</a>
@@ -24,9 +24,9 @@
 							</button>
             </div>
             <form id="navbar-collapse" class="navbar-form collapse navbar-collapse navbar-right">
-                <input id="bookName" type="text" placeholder="What to look for?">
-                <a id="btnSerch" class="btn btn-default">Serch</a>
-                <a id="clean" class="btn btn-default">Clean</a>
+                <input id="bookName" class="search-query" type="text" placeholder="Search">
+                <a id="btnSearch" class="btn btn-info">Search</a>
+                <a id="clean" class="btn btn-danger">Clean</a>
             </form>
         </div>
     </div>
@@ -49,7 +49,13 @@
     </div>
     <div id="bookshelf" class="panel-group">
     </div>
-    <div class="showMore"><button class="btn btn-primary btn-md btn-block"><span class="glyphicon glyphicon-plus-sign"></span> Show more</button></div>
+    <div class="pagination">
+        <div class="btn-group">
+            <button data-id="prev" class="btn btn-default disabled" href="#">Prev</button>
+            <button data-id="more" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Show more</button>
+            <button data-id="next" class="btn btn-default" href="#">Next</button>
+        </div>
+    </div>
     <script type="text/javascript" src="index.js"></script>
 </body>
 
