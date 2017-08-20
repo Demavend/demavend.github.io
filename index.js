@@ -1,9 +1,5 @@
 const STEP = 10;
-const showPrev = () => {
-    if (document.querySelector('button.disabled')) {
-        document.querySelector('button.disabled').setAttribute('class', 'btn btn-default');
-    };
-};
+const button = document.querySelector('button.disabled');
 const fullUrl = (val, start, max) => {
     let url = `https://www.googleapis.com/books/v1/volumes?q=${val}
 &startIndex=${start}&maxResults=${max}`;
@@ -16,7 +12,7 @@ const clean = () => {
     responseResult = [];
     moreCount = 1;
 };
-const warnPopap = () => {
+const warnPopup = () => {
     document.querySelector('.modal-header').innerHTML = `<button class='close'
     data-dismiss='modal'>x</button>`;
     document.querySelector('#bodyModal').innerHTML = `<h3 class='text-danger text-center'>
@@ -30,11 +26,8 @@ const getBooksInit = () => {
             let book = new Book(item);
             book.createBlock();
             responseResult.push(book);
-        });
-    }).catch(warnPopap);
-};
-const disablePrev = e => {
-    if (startIndex === 0) e.target.setAttribute('class', 'btn btn-default disabled');
+        })
+    }).catch(warnPopup);
 };
 let input = document.getElementById('bookName');
 let responseResult = [];
@@ -43,17 +36,17 @@ let startIndex = 0;
 let moreCount = 1;
 class Book {
     constructor(data) {
-        this.id = data.id,
-            this.summary = {
-                title: data.volumeInfo.title || 'Top secret (apparently).',
-                author: data.volumeInfo.authors || 'Your name could be here.',
-                category: data.volumeInfo.categories || 'Not like everyone else.',
-                publisher: data.volumeInfo.publisher || 'Did not pay for advertising.',
-                date: data.volumeInfo.publishedDate || 'It was a long time ago in a galaxy far far away...',
-            },
-            this.description = data.volumeInfo.description || 'If you read this we will have to kill you. Enjoy!',
-            this.img = (!data.volumeInfo.imageLinks || !data.volumeInfo.imageLinks.thumbnail) ?
-            'Images/Cover.gif' : data.volumeInfo.imageLinks.thumbnail
+        this.id = data.id;
+        this.summary = {
+            title: data.volumeInfo.title || 'Top secret (apparently).',
+            author: data.volumeInfo.authors || 'Your name could be here.',
+            category: data.volumeInfo.categories || 'Not like everyone else.',
+            publisher: data.volumeInfo.publisher || 'Did not pay for advertising.',
+            date: data.volumeInfo.publishedDate || 'It was a long time ago in a galaxy far far away...',
+        };
+        this.description = data.volumeInfo.description || 'If you read this we will have to kill you. Enjoy!';
+        this.img = (!data.volumeInfo.imageLinks || !data.volumeInfo.imageLinks.thumbnail) ?
+            'Images/Cover.gif' : data.volumeInfo.imageLinks.thumbnail;
     }
     createBlock() {
         let newDiv = document.createElement('div');
@@ -95,9 +88,7 @@ function modalContent(src) {
     data-dismiss='modal'>x</button>
     <h4 class='text-center text-primary'>${src.title}</h4>`;
     let bookSummary = '';
-    for (let key in src) {
-        bookSummary += `<span class='capitalize'>${key}</span>:  ${src[key]};<br>`;
-    };
+    for (let key in src) bookSummary += `<span class='capitalize'>${key}</span>:  ${src[key]};<br>`;
     document.querySelector('#bodyModal').innerHTML = bookSummary;
 };
 document.querySelector('#bookshelf').addEventListener('click', e => {
@@ -107,17 +98,17 @@ document.querySelector('#bookshelf').addEventListener('click', e => {
         });
         modalContent(idItem.summary);
         $('#modal').modal();
-    };
+    }
 }, false);
 
 document.querySelector('.pagination').addEventListener('click', e => {
     if (e.target.getAttribute('data-id') === 'more') {
         startIndex += STEP;
-        showPrev();
+        if (button) button.setAttribute('class', 'btn btn-default');
         getBooksInit();
         moreCount++;
     } else if (e.target.getAttribute('data-id') === 'next') {
-        showPrev();
+        if (button) button.setAttribute('class', 'btn btn-default');
         clean();
         startIndex += STEP;
         getBooksInit();
@@ -126,9 +117,9 @@ document.querySelector('.pagination').addEventListener('click', e => {
     } else {
         clean();
         startIndex -= STEP;
-        disablePrev(e);
+        if (startIndex === 0) button.setAttribute('class', 'btn btn-default disabled');
         getBooksInit();
         moreCount--;
         navBar.style.display = 'block';
-    };
+    }
 });
