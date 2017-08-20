@@ -21,7 +21,7 @@ const warnPopup = () => {
     $('#modal').modal();
 };
 const getBooksInit = () => {
-    getBooks(fullUrl(serch, startIndex, STEP)).then(response => {
+    getBooks(fullUrl(search, startIndex, STEP)).then(response => {
         response.items.forEach((item) => {
             let book = new Book(item);
             book.createBlock();
@@ -31,7 +31,7 @@ const getBooksInit = () => {
 };
 let input = document.getElementById('bookName');
 let responseResult = [];
-let serch;
+let search;
 let startIndex = 0;
 let moreCount = 1;
 class Book {
@@ -72,7 +72,7 @@ function getBooks(src) {
 };
 
 document.getElementById('btnSerch').addEventListener('click', () => {
-    serch = input.value;
+    search = input.value;
     if (document.querySelector('div.panel-success')) clean();
     getBooksInit();
     navBar.style.display = 'block';
