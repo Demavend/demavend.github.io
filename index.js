@@ -66,7 +66,7 @@ function getBooks(src) {
         xhr.open('GET', src);
         xhr.responseType = 'json';
         xhr.addEventListener('load', () => resolve(xhr.response));
-        xhr.addEventListener('error', () => reject(warnPage()));
+        xhr.addEventListener('error', () => reject(warnPopup()));
         xhr.send();
     });
 };
