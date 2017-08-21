@@ -22,6 +22,7 @@ const warnPopup = () => {
 };
 const getBooksInit = () => {
     getBooks(fullUrl(search, startIndex, STEP)).then(response => {
+        localStorage[fullUrl(search, startIndex, STEP)] = JSON.stringify(response);
         response.items.forEach((item) => {
             let book = new Book(item);
             book.createBlock();
@@ -29,9 +30,15 @@ const getBooksInit = () => {
         })
     }).catch(warnPopup);
 };
+const restoreBooks = () => {
+    JSON.parse(localStorage[fullUrl(search, startIndex, STEP)]).items.forEach((item) => {
+        let book = new Book(item);
+        book.createBlock();
+    })
+};
+let search;
 let input = document.getElementById('bookName');
 let responseResult = [];
-let search;
 let startIndex = 0;
 let moreCount = 1;
 class Book {
@@ -73,14 +80,17 @@ function getBooks(src) {
 
 document.getElementById('btnSearch').addEventListener('click', () => {
     search = input.value;
+    startIndex = 0;
     if (document.querySelector('div.panel-success')) clean();
     getBooksInit();
     navBar.style.display = 'block';
+    button.setAttribute('class', 'btn btn-default disabled');
 });
 document.getElementById('clean').addEventListener('click', () => {
     clean();
     startIndex = 0;
     input.value = '';
+    localStorage.clear();
 });
 
 function modalContent(src) {
@@ -105,20 +115,20 @@ document.querySelector('.pagination').addEventListener('click', e => {
     if (e.target.getAttribute('data-id') === 'more') {
         startIndex += STEP;
         if (button) button.setAttribute('class', 'btn btn-default');
-        getBooksInit();
+        (localStorage[fullUrl(search, startIndex, STEP)]) ? restoreBooks(): getBooksInit();
         moreCount++;
     } else if (e.target.getAttribute('data-id') === 'next') {
         if (button) button.setAttribute('class', 'btn btn-default');
         clean();
         startIndex += STEP;
-        getBooksInit();
+        (localStorage[fullUrl(search, startIndex, STEP)]) ? restoreBooks(): getBooksInit();
         moreCount++;
         navBar.style.display = 'block';
     } else {
         clean();
         startIndex -= STEP;
         if (startIndex === 0) button.setAttribute('class', 'btn btn-default disabled');
-        getBooksInit();
+        restoreBooks();
         moreCount--;
         navBar.style.display = 'block';
     }
