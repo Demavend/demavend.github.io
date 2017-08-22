@@ -1,9 +1,12 @@
 const STEP = 10;
 const button = document.querySelector('button.disabled');
-const fullUrl = (val, start, max) => {
-    let url = `https://www.googleapis.com/books/v1/volumes?q=${val}
-&startIndex=${start}&maxResults=${max}`;
-    return (url);
+const func = {
+    fullUrl: () => {
+        let url = `https://www.googleapis.com/books/v1/volumes?q=${search}
+&startIndex=${startIndex}&maxResults=${STEP}`;
+        return (url);
+    },
+    check: () => (localStorage[func.fullUrl()]) ? restoreBooks() : getBooksInit()
 };
 const navBar = document.querySelector('.pagination');
 const clean = () => {
@@ -21,8 +24,8 @@ const warnPopup = () => {
     $('#modal').modal();
 };
 const getBooksInit = () => {
-    getBooks(fullUrl(search, startIndex, STEP)).then(response => {
-        localStorage[fullUrl(search, startIndex, STEP)] = JSON.stringify(response);
+    getBooks(func.fullUrl()).then(response => {
+        localStorage[func.fullUrl()] = JSON.stringify(response);
         response.items.forEach((item) => {
             let book = new Book(item);
             book.createBlock();
@@ -31,7 +34,7 @@ const getBooksInit = () => {
     }).catch(warnPopup);
 };
 const restoreBooks = () => {
-    JSON.parse(localStorage[fullUrl(search, startIndex, STEP)]).items.forEach((item) => {
+    JSON.parse(localStorage[func.fullUrl()]).items.forEach((item) => {
         let book = new Book(item);
         book.createBlock();
     })
@@ -115,13 +118,13 @@ document.querySelector('.pagination').addEventListener('click', e => {
     if (e.target.getAttribute('data-id') === 'more') {
         startIndex += STEP;
         if (button) button.setAttribute('class', 'btn btn-default');
-        (localStorage[fullUrl(search, startIndex, STEP)]) ? restoreBooks(): getBooksInit();
+        func.check();
         moreCount++;
     } else if (e.target.getAttribute('data-id') === 'next') {
         if (button) button.setAttribute('class', 'btn btn-default');
         clean();
         startIndex += STEP;
-        (localStorage[fullUrl(search, startIndex, STEP)]) ? restoreBooks(): getBooksInit();
+        func.check();
         moreCount++;
         navBar.style.display = 'block';
     } else {
